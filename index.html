@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <title>Document</title>
+
+</head>
+<body>
+    <!-- <button onclick="createNew();">New</button> -->
+    <!-- <svg width = "1080" height = "1080"></svg> -->
+
+<script type = "text/javascript">
+    const svg = d3.select("body").append("svg").attr("width",700).attr("height",700).on("click", click);
+
+    function click(){
+        let coords = d3.mouse(this);
+        console.log(coords);
+        let point = {x: coords[0], y: coords[1]};
+        console.log("drawing circle at", point.x, point.y);
+        // svg.append("circle")
+        //     .attr("transform", "translate(" + point.x + "," + point.y + ")")
+        //     .attr("r", "8")
+        //     .attr("class", "dot")
+        //     .style("cursor", "pointer")
+        //     .style("fill", "blue")
+        //     .call(drag)
+
+        svg.append('input')
+             .attr("transform", "translate(" + point.x + "," + point.y + ")")
+            .attr('type','text')
+            .attr('name','textInput')
+            .attr('value','Text goes here')
+            .call(drag);
+    }
+
+    var drag = d3.drag().on("drag", dragmove);
+
+    function dragmove(d) {
+        var x = d3.event.x;
+        var y = d3.event.y;
+        d3.select(this).attr("transform", "translate(" + x + "," + y + ")");
+    }
+//     function click() {
+//  // Ignore the click event if it was suppressed
+//  if (d3.event.defaultPrevented) return;
+
+//  // Extract the click location\
+//  var point = d3.mouse(this),
+//    p = {
+//      x: point[0],
+//      y: point[1]
+//    };
+
+//  // Append a new point
+//  svg.append("circle")
+//    .attr("transform", "translate(" + p.x + "," + p.y + ")")
+//    .attr("r", "5")
+//    .attr("class", "dot")
+//    .style("cursor", "pointer")
+//    .call(drag);
+// }
+
+// // Create the SVG
+// var svg = d3.select("body").append("svg")
+//  .attr("width", 700)
+//  .attr("height", 400)
+//  .on("click", click);
+
+// // Add a background
+// svg.append("rect")
+//  .attr("width", 1000)
+//  .attr("height", 1000)
+//  .style("stroke", "#999999")
+//  .style("fill", "white")
+
+// // Define drag beavior
+// var drag = d3.drag()
+//  .on("drag", dragmove);
+
+// function dragmove(d) {
+//  var x = d3.event.x;
+//  var y = d3.event.y;
+//  d3.select(this).attr("transform", "translate(" + x + "," + y + ")");
+// }
+    
+    
+    
+    </script>
+</body>
+</html>
