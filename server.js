@@ -21,7 +21,12 @@ app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ secret: 'countdown-project', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }));
+app.use(session({ 
+  secret: 'countdown-project', 
+  cookie: { maxAge: 60000 }, 
+  resave: false, 
+  saveUninitialized: false 
+}));
 
 
 //Configure Mongoose
