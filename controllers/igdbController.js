@@ -9,14 +9,13 @@ module.exports = {
     // getGame: function(param1, param2....) 
     // return axios.get("/api/igdb", { params: { param1 }, { param2 } }); <-- client/src/utils
     search: (req, res) => {
-        const { query: params } = req;
         axios.get("https://api-v3.igdb.com/games", {
             headers: {
             "user-key": keys.igdb.api_key,
             Accept: "application/json"
             },
             params: {
-                search: "civilization",
+                search: req.params.name,
                 fields: "id, name, release_dates"
             }
         })

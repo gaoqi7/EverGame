@@ -8,6 +8,7 @@ const UsersSchema = new Schema({
   email: String,
   hash: String,
   salt: String,
+  savedList: [{type: Schema.Types.ObjectId, ref: 'SavedList'}]
 });
 
 UsersSchema.methods.setPassword = function(password) {

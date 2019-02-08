@@ -32,6 +32,7 @@ router.post('/', auth.optional, (req, res, next) => {
     .then(() => res.json({ user: finalUser.toAuthJSON() }));
 });
 
+// /users/login
 //POST login route (optional, everyone has access)
 router.post('/login', auth.optional, (req, res, next) => {
   const { body: { user } } = req;
@@ -68,6 +69,7 @@ router.post('/login', auth.optional, (req, res, next) => {
   })(req, res, next);
 });
 
+// /users/current
 //GET current route (required, only authenticated users have access)
 router.get('/current', auth.required, (req, res, next) => {
   const { payload: { id } } = req;
