@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <title>Document</title>
+
+</head>
+<body>
+    <button onclick="log();">Console.log</button>
+    <svg width = "1080" height = "1080"></svg>
+
+<script type = "text/javascript">
+
+
+    const nodes = [];
+    const svg = d3.select("svg");
+    let selectedNode = null;
+
+    svg.on("dblclick", function(){
+        if (d3.event.defaultPrevented) return;
+        let coords = d3.mouse(this);
+        let point = {x: coords[0], y: coords[1]};
+        console.log("drawing at", point.x, point.y);
+
+        svg.append("foreignObject")
+            .attr("x", point.x)
+            .attr("y", point.y)
+            // .attr("width", 140)
+            // .attr("height", 20)
+            .html('<input class = "textbox" type="text" />')
+            .attr('value','Text goes here')
+            .call(drag);
+
+        
+            
+    })
+
+    $("input").on("click", function(){
+        console.log(this);
+    })
+
+    // nodes = svg.append('svg:g')
+    //     .attr("class", "node");
+
+    var drag = d3.drag().on("drag", dragmove);
+
+    function dragmove(d) {
+        var x = d3.event.x;
+        var y = d3.event.y;
+        // d3.select(this).attr("transform", "translate(" + x + "," + y + ")");
+        d3.select(this).attr("x", x).attr("y",y);
+    }
+
+    function log(){
+        for (let i = 0; i < $('.textbox').length; i++)
+            console.log($('.textbox')[i].value);
+    }
+
+    // function newNode(id, coords) {
+    //     // declick last click
+
+    //     let node = Node.create({
+    //         id: id,
+    //         x: coords[0],
+    //         y: corrds[1]
+    //     })
+
+    //     // push node into list?
+    //     nodes.push(node);
+        
+    //     // select the node
+        
+    // }
+
+    // function selectNode(node) {
+    //     selectedNode = node;
+    // }
+    
+    
+    </script>
+</body>
+</html>
