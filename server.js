@@ -20,7 +20,11 @@ app.use(cors());
 app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
+// Serve up static assets
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 app.use(session({ 
   secret: 'countdown-project', 
   cookie: { maxAge: 60000 }, 
