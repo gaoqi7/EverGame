@@ -11,12 +11,14 @@ export default {
     login: function(query) {
         console.log(query);
         return axios.post('/api/users/login', { user: {query}})
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
     },
     register: function(email, pass) {
-        console.log(email, pass);
+        console.log({email: email, password: pass});
         return axios.post('/api/users', { user: {email: email, password: pass}})
+                    .then(res => console.log(res))
+    },
+    getExample: function(q) {
+        return axios.get("/api/igdb/Tales of Vesperia").then(res => console.log(res.data));
     }
     
 }

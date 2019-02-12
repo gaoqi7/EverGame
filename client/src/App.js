@@ -27,6 +27,8 @@ class App extends Component {
     this.handleRegisterInput = this.handleRegisterInput.bind(this);
     this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
 
+    this.handleGet = this.handleGet.bind(this);
+
     this.state = { 
       query: '', 
       loginShow: false,
@@ -36,8 +38,8 @@ class App extends Component {
         password: {value: ''}
       },
       register: {
-        newEmail: '',
-        newPassword: '',
+        newEmail: {value: ''},
+        newPassword: {value: ''},
         password2: ''
       }
         // remember: false
@@ -114,6 +116,10 @@ class App extends Component {
     API.register(this.state.register.newEmail.value, this.state.register.newPassword.value);
   }
 
+  handleGet() {
+    API.getExample();
+  }
+
   render() {
     return (
       <div className = "wrapper">
@@ -128,6 +134,7 @@ class App extends Component {
         </form>
           <Button onClick = {this.handleShowLogin} id="loginBtn">Login</Button>
           <Button onClick = {this.handleShowRegister} id="registerBtn">Register</Button>
+          <Button onClick = {this.handleGet} id="registerBtn">GET igdb</Button>
             {/* Login Modal */}
             <Modal show = {this.state.loginShow} onHide = {this.handleCloseLogin} id="loginModal" animation={true}>
               <Modal.Header closeButton className="modal-header">
