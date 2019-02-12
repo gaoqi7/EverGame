@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
@@ -40,7 +41,7 @@ class App extends Component {
       register: {
         newEmail: {value: ''},
         newPassword: {value: ''},
-        password2: ''
+        newName: {value: ''}
       }
         // remember: false
       
@@ -113,7 +114,7 @@ class App extends Component {
   }
 
   handleRegisterSubmit() {
-    API.register(this.state.register.newEmail.value, this.state.register.newPassword.value);
+    API.register(this.state.register);
   }
 
   handleGet() {
@@ -160,7 +161,7 @@ class App extends Component {
               </Modal.Body>
               <Modal.Footer className = "modal-footer">
                 <Button type="submit" className="btn btn-danger btn-default pull-left" onClick = {this.handleCloseLogin}><span className="glyphicon glyphicon-remove"></span> Cancel</Button>
-                <p className = "float-right">Not a member? <span>Sign Up</span></p>
+                <p className = "float-right">Not a member? <Link to={'/signup'}>Sign Up</Link></p>
                 {/* <p className = "float-right">Forgot <span>Password?</span></p> */}
               </Modal.Footer>
             </Modal> 
@@ -174,15 +175,15 @@ class App extends Component {
                 <Form onSubmit = {this.handleRegisterSubmit} role="form">
                   <Form.Group>
                     <Form.Label><span className="glyphicon glyphicon-user"></span> Email address</Form.Label>
-                    <Form.Control type="email" name="newEmail" placeholder="Enter email" value={this.state.register.email} onChange={this.handleRegisterInput}/>
+                    <Form.Control type="email" name="newEmail" placeholder="Enter email" value={this.state.register.newEmail} onChange={this.handleRegisterInput}/>
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label><span className="glyphicon glyphicon-eye-open"></span> Username</Form.Label>
+                    <Form.Control type="text" name="newName" placeholder="Enter username" value={this.state.register.newName} onChange={this.handleRegisterInput} />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label><span className="glyphicon glyphicon-eye-open"></span> Password</Form.Label>
-                    <Form.Control type="password" name="newPassword" placeholder="Enter password" value={this.state.register.password} onChange={this.handleRegisterInput} />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label><span className="glyphicon glyphicon-eye-open"></span> Re-Enter Password</Form.Label>
-                    <Form.Control type="password" name="password2" placeholder="Enter password" value={this.state.register.password2} onChange={this.handleRegisterInput} />
+                    <Form.Control type="password" name="newPassword" placeholder="Enter password" value={this.state.register.newPassword} onChange={this.handleRegisterInput} />
                   </Form.Group>
                   <Button type="submit" className="btn btn-success btn-block"><span className="glyphicon glyphicon-off"></span> Register</Button>
                 </Form>

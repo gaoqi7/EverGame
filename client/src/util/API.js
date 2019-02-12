@@ -1,4 +1,5 @@
 import axios from "axios";
+import Auth from './Auth';
 
 
 
@@ -10,12 +11,14 @@ export default {
     },
     login: function(query) {
         console.log(query);
-        return axios.post('/api/users/login', { user: {query}})
+        return axios.post('/auth/login', { user: {query}})
     },
-    register: function(email, pass) {
-        console.log({email: email, password: pass});
-        return axios.post('/api/users', { user: {email: email, password: pass}})
-                    .then(res => console.log(res))
+    register: function({email, password, name}) {
+        console.log(newUser);
+        return axios.post('/auth/signup', {email: email, password: password, name: name})
+                    .then(res => {
+                        Auth.authenticateUser(res.token)
+                    })
     },
     getExample: function(q) {
         return axios.get("/api/igdb/Tales of Vesperia").then(res => console.log(res.data));
