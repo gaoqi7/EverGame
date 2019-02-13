@@ -4,7 +4,7 @@ const session = require('express-session');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
-
+const igdbController = require("./controllers/igdbController");
 require("dotenv").config();
 
 //Configure mongoose's promise to global promise
@@ -21,17 +21,17 @@ app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ 
-  secret: 'countdown-project', 
-  cookie: { maxAge: 60000 }, 
-  resave: false, 
-  saveUninitialized: false 
+app.use(session({
+  secret: 'countdown-project',
+  cookie: { maxAge: 60000 },
+  resave: false,
+  saveUninitialized: false
 }));
 
 
 //Configure Mongoose
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/countdown-project",
+  process.env.MONGODB_URI || "mongodb://192.168.56.10/countdown-project",
   {
     useCreateIndex: true,
     useNewUrlParser: true
@@ -43,6 +43,20 @@ mongoose.set('debug', true);
 require('./models/Users');
 require('./config/passport');
 app.use(require('./routes'));
+
+
+app.post("/api/search", function (req, res) {
+  console.log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
+  console.log(req.body.searchContent)
+  igdbController.search(req.body.searchContent, res)
+})
+
+app.post("/api/addNew", function (req, res) {
+  console.log(req.body.newItemInfo)
+})
+
+
+
 
 // Start the API server
 app.listen(PORT, () =>

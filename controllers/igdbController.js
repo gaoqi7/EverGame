@@ -9,24 +9,35 @@ module.exports = {
     // getGame: function(param1, param2....) 
     // return axios.get("/api/igdb", { params: { param1 }, { param2 } }); <-- client/src/utils
     search: (req, res) => {
-        const { query: params } = req;
+
+        // const { query: params } = req;
         axios.get("https://api-v3.igdb.com/games", {
             headers: {
-            "user-key": keys.igdb.api_key,
-            Accept: "application/json"
+                "user-key": "dd3daba0559c0275f3cdcbfbb826ef0e",
+                Accept: "application/json"
             },
             params: {
-                search: "civilization",
-                fields: "id, name, release_dates"
+                search: req,
+                fields: "name,genres.name,involved_companies.company,involved_companies.developer,involved_companies.publisher,involved_companies.company.name,cover.image_id,release_dates.date,release_dates.human,summary",
+                "filter[cover.image_id][exists]": "null",
+                "filter[involved_companies][exists]": "null",
+                "filter[release_dates][exists]": "null",
+                "filter[genres][exists]": "null",
+                limit: 50
+
             }
+
+
         })
-        .then(response => {
-            res.json(response.data);
-        })
-        .catch(e => {
-            console.log("error", e);
-        });
-       
+            .then((response) => {
+                console.log(response.data);
+                console.log("********************************************************")
+                res.json(response.data)
+            })
+            .catch(e => {
+                console.log("error", e);
+            });
+
     }
 }
 
