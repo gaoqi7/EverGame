@@ -8,6 +8,11 @@ import LogoutFunction from './containers/LogoutFunction';
 import API from './util/API';
 import Auth from './util/Auth';
 import './App.css'
+import List from './component/List';
+
+
+
+
 
 
 
@@ -25,10 +30,13 @@ class App extends Component {
     this.handleLogout = this.handleLogout.bind(this);
     // this.handleGet = this.handleGet.bind(this);
 
+
     this.state = {
       loginShow: false,
       signUpShow: false,
-      authenticated: false
+      authenticated: false,
+          query: '',
+    apiReturn: []
     }
   }
 
@@ -36,7 +44,23 @@ class App extends Component {
     // check if user is logged in on refresh
     this.toggleAuthenticateStatus();
   }
+  fetchData = () => {
+    API.search(this.state.query)
+      .then(res => {
+        let dataFilter = res.data.filter(el => el.release_dates[el.release_dates.length - 1].date > 1549842737)
+        this.setState({ apiReturn: dataFilter });
+      })
+      .catch(error => { console.log(error) });
+  }
 
+  handleInputChange = event => {
+    this.setState({ query: event.target.value });
+    if (event.target.value.length <= 5) {
+      return;
+    } else {
+      setTimeout(this.fetchData, 300)
+    }
+  
   handleShowLogin() {
     this.setState({loginShow: true})
   }
@@ -69,7 +93,18 @@ class App extends Component {
 
   render() {
     return (
-        <>
+
+      <>
+        <form>
+          <input style={{ border: "blue 2px solid" }}
+            type="text"
+            placeholder="Search"
+            value={this.state.query}
+            onChange={this.handleInputChange}
+          />
+        </form>
+        <List apiReturn={this.state.apiReturn} />
+
         <Button onClick = {this.handleShowLogin} disabled = {this.state.authenticated} id="loginBtn">Login</Button>
         <Button onClick = {this.handleShowSignUp} id="signUpBtn">Register</Button>
         <Button onClick = {this.handleLogout} disabled = {!this.state.authenticated}>Logout</Button>
@@ -79,6 +114,7 @@ class App extends Component {
         <LoginContainer show = {this.state.loginShow} hide = {this.handleCloseLogin.bind(this)}
                         toggleAuthenticateStatus = {this.toggleAuthenticateStatus.bind(this)}/>
         </>
+
     );
 
   }
