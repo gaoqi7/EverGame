@@ -10,13 +10,13 @@ module.exports = {
     // return axios.get("/api/igdb", { params: { param1 }, { param2 } }); <-- client/src/utils
     search: (req, res) => {
 
-        // const { query: params } = req;
         axios.get("https://api-v3.igdb.com/games", {
             headers: {
                 "user-key": "dd3daba0559c0275f3cdcbfbb826ef0e",
                 Accept: "application/json"
             },
             params: {
+
                 search: req,
                 fields: "name,genres.name,involved_companies.company,involved_companies.developer,involved_companies.publisher,involved_companies.company.name,cover.image_id,release_dates.date,release_dates.human,summary",
                 "filter[cover.image_id][exists]": "null",

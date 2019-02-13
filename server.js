@@ -1,15 +1,17 @@
 const express = require('express');
-const path = require('path');
 const session = require('express-session');
-const cors = require('cors');
+const bodyParser = require('body-parser');
+const passport = require('passport');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser')
+
 const igdbController = require("./controllers/igdbController");
+
+const cors = require('cors');
+
+
 require("dotenv").config();
 
-//Configure mongoose's promise to global promise
-mongoose.promise = global.Promise;
-
+const routes = require('./routes');
 
 //Initiate our app
 const app = express();
@@ -17,19 +19,22 @@ const PORT = process.env.PORT || 3001;
 
 //Configure our app
 app.use(cors());
-app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
-  secret: 'countdown-project',
-  cookie: { maxAge: 60000 },
-  resave: false,
-  saveUninitialized: false
+app.use(bodyParser.json())
+app.use(passport.initialize());
+// Serve up static assets
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+app.use(session({ 
+  secret: 'countdown-project', 
+  cookie: { maxAge: 60000 }, 
+  resave: false, 
+  saveUninitialized: false 
+
 }));
 
-
-//Configure Mongoose
+// Configure Mongoose
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://192.168.56.10/countdown-project",
   {
@@ -37,12 +42,19 @@ mongoose.connect(
     useNewUrlParser: true
   }
 );
+mongoose.Promise = global.Promise;
 mongoose.set('debug', true);
 
-//Models & routes
-require('./models/Users');
-require('./config/passport');
-app.use(require('./routes'));
+require('./models');
+
+// Configure Passport
+const localSignupStrategy = require('./config/local-signup');
+const localLoginStrategy = require('./config/local-login');
+passport.use('local-signup', localSignupStrategy);
+passport.use('local-login', localLoginStrategy);
+
+//Routes
+app.use(routes);
 
 
 app.post("/api/search", function (req, res) {
