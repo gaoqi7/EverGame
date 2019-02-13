@@ -1,11 +1,9 @@
 const path = require("path");
 const express = require('express');
 const router = express.Router();
-const userRoutes = require("./users");
 const igdbRoutes = require("./igdb");
 // const listRoutes = require("./userlist")
 
-router.use('/users', userRoutes);
 router.use('/igdb', igdbRoutes);
 // router.use('/userlist', listRoutes);
 

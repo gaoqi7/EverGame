@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema({
   },
   password: String,
   name: String,
-  savedList: [{type: Schema.Types.ObjectId, ref: 'SavedList'}]
+  // SavedList: [{type: mongoose.Schema.Types.ObjectId, ref: 'SavedList'}]
 });
 
 

@@ -9,6 +9,7 @@ module.exports = {
     // getGame: function(param1, param2....) 
     // return axios.get("/api/igdb", { params: { param1 }, { param2 } }); <-- client/src/utils
     search: (req, res) => {
+        console.log(req);
         const { body: { params } } = req;
         axios.get("https://api-v3.igdb.com/games", {
             headers: {

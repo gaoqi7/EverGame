@@ -1,7 +1,9 @@
 const express = require('express');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 require("dotenv").config();
 
@@ -12,6 +14,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 //Configure our app
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
@@ -26,12 +29,6 @@ app.use(session({
   saveUninitialized: false 
 }));
 
-// Configure Passport
-const localSignupStrategy = require('./config/local-signup');
-const localLoginStrategy = require('./config/local-login');
-passport.use('local-signup', localSignupStrategy);
-passport.use('local-login', localLoginStrategy);
-
 // Configure Mongoose
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/countdown-project",
@@ -42,6 +39,14 @@ mongoose.connect(
 );
 mongoose.Promise = global.Promise;
 mongoose.set('debug', true);
+
+require('./models');
+
+// Configure Passport
+const localSignupStrategy = require('./config/local-signup');
+const localLoginStrategy = require('./config/local-login');
+passport.use('local-signup', localSignupStrategy);
+passport.use('local-login', localLoginStrategy);
 
 //Routes
 app.use(routes);

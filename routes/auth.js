@@ -2,7 +2,8 @@ const express = require('express');
 const validator = require('validator');
 const passport = require('passport');
 
-const router = new express.Router();
+const router = require("express").Router();
+// const router = new express.Router();
 
 /**
  * Validate the sign up form
