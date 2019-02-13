@@ -7,8 +7,8 @@ const igdbRoutes = require("./igdb");
 router.use('/igdb', igdbRoutes);
 // router.use('/userlist', listRoutes);
 
-router.use(function(req, res) {
-    res.sendFile(path.join(__dirname, "../../client/build/index.html"));  // change to /client/build later
-});
+// router.use(function (req, res) {
+//     res.sendFile(path.join(__dirname, "../../client/build/index.html"));  // change to /client/build later
+// });
 
 module.exports = router;

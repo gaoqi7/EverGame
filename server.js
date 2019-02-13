@@ -9,7 +9,7 @@ const igdbController = require("./controllers/igdbController");
 const cors = require('cors');
 
 
-require("dotenv").config();
+// require("dotenv").config();
 
 const routes = require('./routes');
 
@@ -23,14 +23,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 app.use(passport.initialize());
 // Serve up static assets
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
-app.use(session({ 
-  secret: 'countdown-project', 
-  cookie: { maxAge: 60000 }, 
-  resave: false, 
-  saveUninitialized: false 
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("client/build"));
+// }
+app.use(session({
+  secret: 'countdown-project',
+  cookie: { maxAge: 60000 },
+  resave: false,
+  saveUninitialized: false
 
 }));
 
@@ -54,7 +54,6 @@ passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
 
 //Routes
-app.use(routes);
 
 
 app.post("/api/search", function (req, res) {
@@ -67,6 +66,7 @@ app.post("/api/addNew", function (req, res) {
   console.log(req.body.newItemInfo)
 })
 
+app.use(routes);
 
 
 
