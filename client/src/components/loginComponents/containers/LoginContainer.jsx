@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Auth from '../util/Auth';
+import Auth from '../../../util/Auth';
 import LoginModal from '../components/LoginModal.jsx';
 
 class LoginContainer extends React.Component {
@@ -43,20 +43,20 @@ class LoginContainer extends React.Component {
     event.preventDefault();
 
     // create a string for an HTTP body message
-    const formData = {email: this.state.user.email, password: this.state.user.password};
+    const formData = { email: this.state.user.email, password: this.state.user.password };
 
     axios.post('/auth/login', formData)
-        .then(res => {
-            console.log(res);
-            if (res.status === 200) {
-                this.setState({ errors: {} });
-                Auth.authenticateUser(res.token);
-                this.props.toggleAuthenticateStatus();
-                // this.props.history.push('/dashboard'); // ?
-            }
-            else {}            
-        }).catch(err => { console.log(err)})
-   }
+      .then(res => {
+        console.log(res);
+        if (res.status === 200) {
+          this.setState({ errors: {} });
+          Auth.authenticateUser(res.token);
+          this.props.toggleAuthenticateStatus();
+          // this.props.history.push('/dashboard'); // ?
+        }
+        else { }
+      }).catch(err => { console.log(err) })
+  }
 
   /**
    * Change the user object.

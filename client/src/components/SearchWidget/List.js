@@ -5,7 +5,7 @@ import Company from './Company';
 import Name from './Name';
 import ReleaseDate from './ReleaseDate';
 import Addbtn from './Addbtn';
-import API from '../util/API';
+import API from '../../util/API';
 
 function List(props) {
 
@@ -23,7 +23,6 @@ function List(props) {
                     company: companyPublisher,
                     releaseDate: elem.release_dates[elem.release_dates.length - 1]
                 }
-                {/* This function is called when user want to add one option directly to his list */ }
                 function add2db(data) {
                     console.log("this is the data to database" + data)
                     API.addNew(data)
@@ -40,7 +39,7 @@ function List(props) {
                         <Company company={companyPublisher[0]} />
                         <ReleaseDate date={elem.release_dates} />
                     </div>
-                    <div className="col-3 d-flex text-center">
+                    <div className="col-3 d-flex text-center" onClick={() => { add2db(info2db) }}>
                         <Addbtn />
                     </div>
 

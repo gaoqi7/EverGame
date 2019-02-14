@@ -1,5 +1,5 @@
 import React from 'react';
-import Auth from '../util/Auth';
+import Auth from '../../../util/Auth';
 
 class LogoutFunction extends React.Component {
 

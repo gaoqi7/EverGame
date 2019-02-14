@@ -6,7 +6,6 @@ const keys = require('../keys')
 module.exports = {
 
     // API.getGame(this.state....) <- client/src/pages
-    // getGame: function(param1, param2....) 
     // return axios.get("/api/igdb", { params: { param1 }, { param2 } }); <-- client/src/utils
     search: (req, res) => {
 
