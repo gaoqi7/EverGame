@@ -9,7 +9,7 @@ const igdbController = require("./controllers/igdbController");
 const cors = require('cors');
 
 
-// require("dotenv").config();
+require("dotenv").config();
 
 const routes = require('./routes');
 
@@ -36,7 +36,7 @@ app.use(session({
 
 // Configure Mongoose
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://192.168.56.10/countdown-project",
+  process.env.MONGODB_URI || "mongodb://localhost/countdown-project" ,
   {
     useCreateIndex: true,
     useNewUrlParser: true

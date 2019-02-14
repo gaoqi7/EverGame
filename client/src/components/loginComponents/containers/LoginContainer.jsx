@@ -52,6 +52,7 @@ class LoginContainer extends React.Component {
           this.setState({ errors: {} });
           Auth.authenticateUser(res.token);
           this.props.toggleAuthenticateStatus();
+          localStorage.setItem("user", res.data.user.name)
           // this.props.history.push('/dashboard'); // ?
         }
         else { }

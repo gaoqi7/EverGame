@@ -3,12 +3,21 @@ const { Schema } = mongoose;
 
 const SavedListSchema = new Schema({
     // Name, Img, Genre, Release Date
+    email: {
+        type: {type: Schema.Types.ObjectId, ref: 'User'}
+    },
+
     name: {
         type: String,
         required: true
     },
 
     genre: {
+        type: String,
+        default: ""
+    },
+
+    company: {
         type: String,
         default: ""
     },
@@ -24,7 +33,7 @@ const SavedListSchema = new Schema({
         required: true
     },
 
-    thumb: {
+    cover: {
         type: String
     }
 })
