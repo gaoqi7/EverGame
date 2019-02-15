@@ -2,7 +2,11 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form'
+<<<<<<< HEAD
 import "../components/modal.css"
+=======
+
+>>>>>>> a95aacd38ce1caae6b5fbf65a102c85919412594
 // import { Link } from 'react-router-dom';
 
 function LoginModal({onSubmit, onChange, errors, successMessage, user, show, hide}) {
@@ -28,7 +32,11 @@ return(
             </Form.Group>
             {errors.summary && <p className="error-message text-danger float-left">{errors.summary}</p>}
             {successMessage && <p className="success-message text-success float-left">{successMessage}</p>}
+<<<<<<< HEAD
             <Button type="submit" className="btn btn-warning btn-block"><span className="glyphicon glyphicon-off"></span> Login</Button>
+=======
+            <Button type="submit" className="btn btn-success btn-block" onClick = {hide}><span className="glyphicon glyphicon-off"></span> Login</Button>
+>>>>>>> a95aacd38ce1caae6b5fbf65a102c85919412594
         </Form>
     </Modal.Body>
     <Modal.Footer className = "modal-footer">
