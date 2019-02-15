@@ -10,7 +10,7 @@ const UserSchema = new Schema({
   },
   password: String,
   name: String,
-  SavedList: [{type: Schema.Types.ObjectId, ref: 'SavedList'}]
+  // SavedList: [{type: Schema.Types.ObjectId, ref: 'SavedList'}]
 });
 
 
