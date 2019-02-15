@@ -1,5 +1,5 @@
 const express = require('express');
-// const session = require('express-session');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const mongoose = require('mongoose');
@@ -27,16 +27,11 @@ app.use(passport.initialize());
 // if (process.env.NODE_ENV === "production") {
 //   app.use(express.static("client/build"));
 // }
-// app.use(session({
-//   secret: 'countdown-project',
-//   cookie: { maxAge: 60000 },
-//   resave: false,
-//   saveUninitialized: false
-
-//Routes
-//Middleware order matter. CORS must higher than any route.
-const routes = require('./routes');
-// }));
+app.use(session({
+  secret: 'countdown-project',
+  cookie: { maxAge: 60000 },
+  resave: false,
+  saveUninitialized: false}))
 
 // Configure Mongoose
 mongoose.connect(
