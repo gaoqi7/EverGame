@@ -17,11 +17,14 @@ function List(props) {
             {props.apiReturn.map((elem) => {
                 let imgLink = `https://images.igdb.com/igdb/image/upload/t_thumb/${elem.cover.image_id}.jpg`
                 let companyPublisher = elem.involved_companies.filter(el => el.publisher)
-                let info2db = {
-                    name: elem.name,
-                    genre: elem.genres,
-                    company: companyPublisher,
-                    releaseDate: elem.release_dates[elem.release_dates.length - 1]
+                let dataPackage = {
+                    query: localStorage.getItem("id"),
+                    info2db: {
+                        name: elem.name,
+                        genre: elem.genres,
+                        company: companyPublisher,
+                        releaseDate: elem.release_dates[elem.release_dates.length - 1]
+                    }
                 }
                 function add2db(data) {
                     console.log("this is the data to database" + data)
@@ -39,7 +42,7 @@ function List(props) {
                         <Company company={companyPublisher[0]} />
                         <ReleaseDate date={elem.release_dates} />
                     </div>
-                    <div className="col-3 d-flex text-center" onClick={() => { add2db(info2db) }}>
+                    <div className="col-3 d-flex text-center" onClick={() => { add2db(dataPackage) }}>
                         <Addbtn />
                     </div>
 

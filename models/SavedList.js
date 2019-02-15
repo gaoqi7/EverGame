@@ -13,6 +13,10 @@ const SavedListSchema = new Schema({
         required: true
     },
 
+    company: {
+        type: String,
+        default: ""
+    },
     genre: {
         type: String,
         default: ""
@@ -37,6 +41,8 @@ const SavedListSchema = new Schema({
     cover: {
         type: String
     }
+
+
 })
 
 const SavedList = mongoose.model("SavedList", SavedListSchema);
