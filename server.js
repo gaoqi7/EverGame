@@ -1,17 +1,18 @@
 const express = require('express');
-const session = require('express-session');
+// const session = require('express-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const mongoose = require('mongoose');
+const db = require('./models')
 
 const igdbController = require("./controllers/igdbController");
 
 const cors = require('cors');
 
 
-// require("dotenv").config();
+require("dotenv").config();
 
-const routes = require('./routes');
+
 
 //Initiate our app
 const app = express();
@@ -26,17 +27,20 @@ app.use(passport.initialize());
 // if (process.env.NODE_ENV === "production") {
 //   app.use(express.static("client/build"));
 // }
-app.use(session({
-  secret: 'countdown-project',
-  cookie: { maxAge: 60000 },
-  resave: false,
-  saveUninitialized: false
+// app.use(session({
+//   secret: 'countdown-project',
+//   cookie: { maxAge: 60000 },
+//   resave: false,
+//   saveUninitialized: false
 
-}));
+//Routes
+//Middleware order matter. CORS must higher than any route.
+const routes = require('./routes');
+// }));
 
 // Configure Mongoose
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://192.168.56.10/countdown-project",
+  process.env.MONGODB_URI || "mongodb://localhost/countdown-project" ,
   {
     useCreateIndex: true,
     useNewUrlParser: true
@@ -45,6 +49,7 @@ mongoose.connect(
 mongoose.Promise = global.Promise;
 mongoose.set('debug', true);
 
+const routes = require('./routes');
 require('./models');
 
 // Configure Passport
@@ -53,7 +58,6 @@ const localLoginStrategy = require('./config/local-login');
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
 
-//Routes
 
 
 app.post("/api/search", function (req, res) {
@@ -64,6 +68,8 @@ app.post("/api/search", function (req, res) {
 
 app.post("/api/addNew", function (req, res) {
   console.log(req.body.newItemInfo)
+  let d = req.body.newItemInfo.info2db
+  db.SavedList.create(d)
 })
 
 app.use(routes);
