@@ -12,6 +12,7 @@ function home() {
         <Sidebar />
         <div id="content">
           <Header />
+          <br></br>
           <Logo />
           <Carousel />
           <List />

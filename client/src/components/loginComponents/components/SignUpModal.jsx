@@ -3,14 +3,16 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 // import { Link } from 'react-router-dom';
-import '../../../pages/App.css';
+import "../components/modal.css"
+
+// import '../../../pages/App.css';
 
 function SignUpModal({ onSubmit, onChange, errors, user, show, hide }) {
 
   return (
     <Modal show={show} onHide={hide} id="signUpModal" animation={true}>
-      <Modal.Header closeButton className="modal-header">
-        <h4><span className="glyphicon glyphicon-lock"></span> Register</h4>
+      <Modal.Header closeButton className="modal-header modalHeader">
+        <div className="modalText">Register</div> 
       </Modal.Header>
       <Modal.Body className="modal-body">
         <Form onSubmit={onSubmit} >
@@ -27,7 +29,7 @@ function SignUpModal({ onSubmit, onChange, errors, user, show, hide }) {
             <Form.Control type="password" name="password" placeholder="Enter password" value={user.password} onChange={onChange} />
           </Form.Group>
           {errors.summary && <p className="error-message text-danger float-left">{errors.summary}</p>}
-          <Button type="submit" className="btn btn-success btn-block"><span className="glyphicon glyphicon-off"></span> Register</Button>
+          <Button type="submit" className="btn btn-warning btn-block"><span className="glyphicon glyphicon-off"></span> Register</Button>
         </Form>
       </Modal.Body>
       <Modal.Footer className="modal-footer">

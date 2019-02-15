@@ -68,15 +68,15 @@ class Login extends Component {
     render() {
         return (
 
-            <>
-                <Button onClick={this.handleShowLogin} disabled={this.state.authenticated} id="loginBtn">Login</Button>
-                <Button onClick={this.handleShowSignUp} id="signUpBtn">Register</Button>
-                <Button onClick={this.handleLogout} disabled={!this.state.authenticated}>Logout</Button>
+            <div className="loginDiv">
+                <Button onClick={this.handleShowLogin} disabled={this.state.authenticated} className="loginBtn btn btn-warning">Login</Button>
+                <Button onClick={this.handleShowSignUp} className="signUpBtn btn btn-warning">Register</Button>
+                <Button onClick={this.handleLogout} disabled={!this.state.authenticated} className="logoutBtn btn btn-warning">Logout</Button>
                 {/* <Button onClick = {this.handleGet} id="getBtn">GET igdb</Button> */}
                 <SignUpContainer show={this.state.signUpShow} hide={this.handleCloseSignUp.bind(this)} />
                 <LoginContainer show={this.state.loginShow} hide={this.handleCloseLogin.bind(this)}
                     toggleAuthenticateStatus={this.toggleAuthenticateStatus.bind(this)} />
-            </>
+            </div>
 
         );
 
