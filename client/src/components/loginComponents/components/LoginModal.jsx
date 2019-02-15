@@ -2,14 +2,16 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form'
+import "../components/modal.css"
 // import { Link } from 'react-router-dom';
 
 function LoginModal({onSubmit, onChange, errors, successMessage, user, show, hide}) {
 
 return(
     <Modal show = {show} onHide = {hide} id="loginModal" animation={true}>
-    <Modal.Header closeButton className="modal-header">
-        <h4><span className="glyphicon glyphicon-lock"></span> Login</h4>
+    <Modal.Header closeButton className="modal-header modalHeader"> 
+        <div className="modalText">Login</div>
+        {/* <h4><span className="glyphicon glyphicon-lock"></span> Login</h4> */}
     </Modal.Header>
     <Modal.Body className = "modal-body">
         <Form onSubmit = {onSubmit}>
@@ -26,7 +28,7 @@ return(
             </Form.Group>
             {errors.summary && <p className="error-message text-danger float-left">{errors.summary}</p>}
             {successMessage && <p className="success-message text-success float-left">{successMessage}</p>}
-            <Button type="submit" className="btn btn-success btn-block"><span className="glyphicon glyphicon-off"></span> Login</Button>
+            <Button type="submit" className="btn btn-warning btn-block"><span className="glyphicon glyphicon-off"></span> Login</Button>
         </Form>
     </Modal.Body>
     <Modal.Footer className = "modal-footer">
