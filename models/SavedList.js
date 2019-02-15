@@ -8,6 +8,10 @@ const SavedListSchema = new Schema({
         required: true
     },
 
+    company: {
+        type: String,
+        default: ""
+    },
     genre: {
         type: String,
         default: ""
@@ -22,11 +26,9 @@ const SavedListSchema = new Schema({
         type: Boolean,
         default: false,
         required: true
-    },
-
-    thumb: {
-        type: String
     }
+
+
 })
 
 const SavedList = mongoose.model("SavedList", SavedListSchema);
