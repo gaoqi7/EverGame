@@ -20,6 +20,7 @@ class Login extends Component {
         this.handleClosesignUp = this.handleCloseSignUp.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
         this.handleAddSample = this.handleAddSample.bind(this);
+        this.handlePopulate = this.handlePopulate.bind(this);
         // this.handleGet = this.handleGet.bind(this);
 
 
@@ -69,6 +70,10 @@ class Login extends Component {
         API.test();
     }
 
+    handlePopulate() {
+        API.populate();
+    }
+
     render() {
         return (
 
@@ -78,6 +83,9 @@ class Login extends Component {
                 <Button onClick={this.handleLogout} disabled={!this.state.authenticated}>Logout</Button>
                 <div>
                     <Button onClick={this.handleAddSample} disabled={!this.state.authenticated} className = 'bg-success'>Add sample to userList</Button>
+                </div>
+                <div>
+                    <Button onClick={this.handlePopulate} disabled={!this.state.authenticated} className = 'bg-info'>Populate</Button>
                 </div>
                 {/* <Button onClick = {this.handleGet} id="getBtn">GET igdb</Button> */}
                 <SignUpContainer show={this.state.signUpShow} hide={this.handleCloseSignUp.bind(this)} />

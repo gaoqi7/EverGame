@@ -3,8 +3,7 @@ const { Schema } = mongoose;
 
 const SavedListSchema = new Schema({
     // Name, Img, Genre, Release Date
-    email: {
-        // type: {type: Schema.Types.ObjectId, ref: 'User'}
+    user_id: {
         type: String,
         required: true,
     },

@@ -11,7 +11,7 @@ const cors = require('cors');
 
 require("dotenv").config();
 
-const routes = require('./routes');
+
 
 //Initiate our app
 const app = express();
@@ -45,6 +45,7 @@ mongoose.connect(
 mongoose.Promise = global.Promise;
 mongoose.set('debug', true);
 
+const routes = require('./routes');
 require('./models');
 
 // Configure Passport

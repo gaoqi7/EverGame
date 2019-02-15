@@ -15,6 +15,11 @@ module.exports = {
 
     populate: function(req,res) {
         db.User.findOne({email: req.body.email})
-            .populate(email).then(response => console.log(response));
-    }
+            .populate('savedList')
+            .exec(function (err, response) {
+                if (err) return console.log(err);
+                console.log(response);
+            }
+            )
+        }           
 }

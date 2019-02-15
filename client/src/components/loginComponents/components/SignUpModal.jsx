@@ -27,7 +27,7 @@ function SignUpModal({ onSubmit, onChange, errors, user, show, hide }) {
             <Form.Control type="password" name="password" placeholder="Enter password" value={user.password} onChange={onChange} />
           </Form.Group>
           {errors.summary && <p className="error-message text-danger float-left">{errors.summary}</p>}
-          <Button type="submit" className="btn btn-success btn-block"><span className="glyphicon glyphicon-off"></span> Register</Button>
+          <Button type="submit" className="btn btn-success btn-block" onClick = {hide}><span className="glyphicon glyphicon-off"></span> Register</Button>
         </Form>
       </Modal.Body>
       <Modal.Footer className="modal-footer">
