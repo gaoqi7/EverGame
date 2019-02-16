@@ -18,8 +18,7 @@ class SearchWidget extends Component {
         console.log(this.state.query)
         API.search(this.state.query)
             .then(res => {
-                console.log(res.data)
-                let dataFilter = res.data.filter(el => el.release_dates[el.release_dates.length - 1].date > 1549842737)
+                let dataFilter = res.data.filter(el => el.release_dates[el.release_dates.length - 1].date > 1550348343)
                 this.setState({ apiReturn: dataFilter });
                 console.log(dataFilter)
             })

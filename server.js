@@ -59,18 +59,24 @@ passport.use('local-login', localLoginStrategy);
 
 
 app.post("/api/search", function (req, res) {
-  console.log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
-  console.log(req.body.searchContent)
   igdbController.search(req.body.searchContent, res)
 })
 
 app.post("/api/addNew", function (req, res) {
-  console.log(req.body)
   let d = req.body.newItemInfo
-  // console.log(d)
   db.SavedList.create(d)
     .then(game => { console.log(game) })
 })
+
+app.post("/api/getlist", function (req, res) {
+  console.log(req.body)
+  db.SavedList.find({ userId: req.body.id })
+    .lean()
+    .then(list => { console.log(JSON.stringify(list)); return res.end(JSON.stringify(list)); })
+
+})
+
+
 
 app.use(routes);
 
