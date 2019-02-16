@@ -6,6 +6,7 @@ import Name from './Name';
 import ReleaseDate from './ReleaseDate';
 import Addbtn from './Addbtn';
 import API from '../../util/API';
+import "../SearchWidget/searchbar.css"
 
 class List extends Component {
     constructor(props) {
@@ -37,7 +38,7 @@ class List extends Component {
     render() {
         return (
             <li key={this.props.apiReturn.id}
-                className="row no-gutters border-bottom border-warning"
+                className="row responseDiv"
                 onMouseOver={this.onMouseOver.bind(this)}
                 onMouseLeave={this.onMouseLeave.bind(this)}
             >
@@ -61,7 +62,7 @@ class List extends Component {
                         )}
                 </div>
 
-                <div className="col-1 d-flex text-center" onClick={() => { this.add2db(this.state.info2db) }}>
+                <div className="col-1 d-flex" onClick={() => { this.add2db(this.state.info2db) }}>
                     <Addbtn />
                 </div>
             </li>
