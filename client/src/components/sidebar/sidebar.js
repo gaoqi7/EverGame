@@ -13,18 +13,24 @@ function Sidebar() {
             <ul className="list-unstyled components">
                 <li>
                     <a href="/yourList">
-                        <i className="fas fa-briefcase"></i>
+                        <i className="fas fa-list iconSpacing"></i>
                         Your List
                     </a>
                 </li>
                 <li>
                     <a href="/home">
-                        <i className="fas fa-briefcase"></i>
+                        <i className="fas fa-home iconSpacing"></i>
                         Home
                     </a>
                 </li>
-                
-                <li className="active">
+
+                <li>
+                    <a href="/game">
+                        <i className="fas fa-trophy iconSpacing"></i>
+                        Game Test
+                    </a>
+                </li>
+                {/* <li className="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
                         <i className="fas fa-home"></i>
                         Home
@@ -40,8 +46,8 @@ function Sidebar() {
                             <a href="google.com">Home 3</a>
                         </li>
                     </ul>
-                </li>
-                <li>
+                </li> */}
+                {/* <li>
                     <a href="/home">
                         <i className="fas fa-briefcase"></i>
                         About
@@ -83,7 +89,7 @@ function Sidebar() {
                         <i className="fas fa-paper-plane"></i>
                         Contact
                     </a>
-                </li>
+                </li>  */}
             </ul>
 
             {/* <ul className="list-unstyled CTAs">

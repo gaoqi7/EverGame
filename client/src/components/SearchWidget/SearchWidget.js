@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import API from '../../util/API';
 import List from './List';
+import "../SearchWidget/searchbar.css"
 
 
 
@@ -39,28 +40,29 @@ class SearchWidget extends Component {
     render() {
         return (
 
-            <div >
+            <div className="holderDiv">
                 <form>
-                    <input style={{ border: "blue 2px solid" }}
+                    <input className="searchBar"
                         type="text"
                         placeholder="Search"
                         value={this.state.query}
                         onChange={this.handleInputChange}
                     />
                 </form>
-                <ul className="container"
+                <div className="container"
                     style={{
                         position: "absolute",
                         zIndex: "3",
-                        width: "600px",
+                        width: "70vw",
                         backgroundColor: "white",
                         borderRadius: "5px",
-                        marginTop: "7px"
-                    }} >
+                        border: "black 1px solid"
+                    }}
+                    >
 
                     {this.state.apiReturn.map((elem) => <List apiReturn={elem} key={elem.id} />)}
 
-                </ul>
+                </div>
             </div>
         )
     }

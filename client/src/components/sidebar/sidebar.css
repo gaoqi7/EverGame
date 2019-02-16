@@ -21,6 +21,11 @@
     100%{background-position:0% 64%}
 } 
 
+.iconSpacing {
+
+    margin-right: 10%;
+}
+
 p {
     font-family: 'Poppins', sans-serif;
     font-size: 1.1em;
