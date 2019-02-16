@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Name(props) {
-    return <h6 className="mb-0">{props.name}</h6>
+    return <h5>{props.name}</h5>
 }
 
 export default Name

@@ -3,27 +3,13 @@ const { Schema } = mongoose;
 
 const SavedListSchema = new Schema({
     // Name, Img, Genre, Release Date
-    user_id: {
-        type: String,
-        required: true,
-    },
-
     name: {
         type: String,
         required: true
     },
 
-    company: {
-        type: String,
-        default: ""
-    },
     genre: {
-        type: String,
-        default: ""
-    },
-
-    company: {
-        type: String,
+        type: Array,
         default: ""
     },
 
@@ -38,11 +24,9 @@ const SavedListSchema = new Schema({
         required: true
     },
 
-    cover: {
-        type: String
+    company: {
+        type: Array
     }
-
-
 })
 
 const SavedList = mongoose.model("SavedList", SavedListSchema);

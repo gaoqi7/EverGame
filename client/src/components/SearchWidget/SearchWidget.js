@@ -10,6 +10,10 @@ class SearchWidget extends Component {
         apiReturn: []
     }
 
+    onMouseEnter() {
+
+    }
+
     fetchData = () => {
         console.log(this.state.query)
         API.search(this.state.query)
@@ -17,6 +21,7 @@ class SearchWidget extends Component {
                 console.log(res.data)
                 let dataFilter = res.data.filter(el => el.release_dates[el.release_dates.length - 1].date > 1549842737)
                 this.setState({ apiReturn: dataFilter });
+                console.log(dataFilter)
             })
             .catch(error => { console.log(error) });
     }
@@ -34,7 +39,7 @@ class SearchWidget extends Component {
     render() {
         return (
 
-            <>
+            <div >
                 <form>
                     <input style={{ border: "blue 2px solid" }}
                         type="text"
@@ -43,8 +48,20 @@ class SearchWidget extends Component {
                         onChange={this.handleInputChange}
                     />
                 </form>
-                <List apiReturn={this.state.apiReturn} />
-            </>
+                <ul className="container"
+                    style={{
+                        position: "absolute",
+                        zIndex: "3",
+                        width: "600px",
+                        backgroundColor: "white",
+                        borderRadius: "5px",
+                        marginTop: "7px"
+                    }} >
+
+                    {this.state.apiReturn.map((elem) => <List apiReturn={elem} key={elem.id} />)}
+
+                </ul>
+            </div>
         )
     }
 }

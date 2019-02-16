@@ -31,11 +31,14 @@ app.use(session({
   secret: 'countdown-project',
   cookie: { maxAge: 60000 },
   resave: false,
-  saveUninitialized: false}))
+  saveUninitialized: false
+}))
 
 // Configure Mongoose
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/countdown-project" ,
+
+  // process.env.MONGODB_URI || "mongodb://localhost/countdown-project",
+  process.env.MONGODB_URI || "mongodb://192.168.56.10/countdown-project",
   {
     useCreateIndex: true,
     useNewUrlParser: true
