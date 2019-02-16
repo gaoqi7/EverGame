@@ -14,14 +14,14 @@ class List extends Component {
             mouseOver: false,
             imgLink: `https://images.igdb.com/igdb/image/upload/t_thumb/${props.apiReturn.cover.image_id}.jpg`,
             info2db: {
-                id: localStorage.getItem("id"),
+                userId: localStorage.getItem("id"),
                 name: props.apiReturn.name,
                 genre: props.apiReturn.genres,
                 companyName: props.apiReturn.involved_companies.filter(el => el.publisher)[0].company.name,
-                releaseDate: {
-                    data: props.apiReturn.release_dates[props.apiReturn.release_dates.length - 1].date,
-                    human: props.apiReturn.release_dates[props.apiReturn.release_dates.length - 1].human
-                }
+                releaseDate: [
+                    props.apiReturn.release_dates[props.apiReturn.release_dates.length - 1].date,
+                    props.apiReturn.release_dates[props.apiReturn.release_dates.length - 1].human
+                ]
             }
         }
     }
