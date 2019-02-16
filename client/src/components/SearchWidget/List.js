@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Cover from './Cover';
 import Genre from './Genre';
 import Company from './Company';
@@ -7,50 +7,67 @@ import ReleaseDate from './ReleaseDate';
 import Addbtn from './Addbtn';
 import API from '../../util/API';
 
-function List(props) {
-
-
-
-
-    return (
-        <ul className="container">
-            {props.apiReturn.map((elem) => {
-                let imgLink = `https://images.igdb.com/igdb/image/upload/t_thumb/${elem.cover.image_id}.jpg`
-                let companyPublisher = elem.involved_companies.filter(el => el.publisher)
-                let dataPackage = {
-                    query: localStorage.getItem("id"),
-                    info2db: {
-                        name: elem.name,
-                        genre: elem.genres,
-                        company: companyPublisher,
-                        releaseDate: elem.release_dates[elem.release_dates.length - 1]
-                    }
+class List extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            mouseOver: false,
+            imgLink: `https://images.igdb.com/igdb/image/upload/t_thumb/${props.apiReturn.cover.image_id}.jpg`,
+            info2db: {
+                id: localStorage.getItem("id"),
+                name: props.apiReturn.name,
+                genre: props.apiReturn.genres,
+                companyName: props.apiReturn.involved_companies.filter(el => el.publisher)[0].company.name,
+                releaseDate: {
+                    data: props.apiReturn.release_dates[props.apiReturn.release_dates.length - 1].date,
+                    human: props.apiReturn.release_dates[props.apiReturn.release_dates.length - 1].human
                 }
-                function add2db(data) {
-                    console.log("this is the data to database" + data)
-                    API.addNew(data)
-                        .then(() => { console.log("cool") })
-                        .catch(err => { console.log(err) })
-                }
-                return <li key={elem.id} className="row no-gutters border-bottom border-warning">
-                    <div className="col-3 d-flex text-center">
-                        <Cover imgInfo={imgLink} alt={elem.id} />
-                    </div>
-                    <div className="col-6 d-flex">
-                        <Name name={elem.name} />
-                        <Genre genreList={elem.genres} />
-                        <Company company={companyPublisher[0]} />
-                        <ReleaseDate date={elem.release_dates} />
-                    </div>
-                    <div className="col-3 d-flex text-center" onClick={() => { add2db(dataPackage) }}>
-                        <Addbtn />
-                    </div>
+            }
+        }
+    }
+    onMouseOver() { this.setState({ mouseOver: true }); console.log(this.state.info2db) }
+    onMouseLeave() { this.setState({ mouseOver: false }) }
 
-                </li>
-            })}
+    add2db(data) {
+        console.log("this is the data to database" + data)
+        API.addNew(data)
+            .then(() => { console.log("cool") })
+            .catch(err => { console.log(err) })
+    }
 
-        </ul>
-    )
+    render() {
+        return (
+            <li key={this.props.apiReturn.id}
+                className="row no-gutters border-bottom border-warning"
+                onMouseOver={this.onMouseOver.bind(this)}
+                onMouseLeave={this.onMouseLeave.bind(this)}
+            >
+                <div className="col-2 d-flex text-center">
+                    <Cover imgInfo={this.state.imgLink} alt={this.props.apiReturn.id} />
+                </div>
+                <div className="col-9 d-flex flex-column justify-content-center" >
+                    {this.state.mouseOver ?
+                        (
+                            <>
+                                <Genre genreList={this.state.info2db.genre} />
+                                <Company companyInfo={this.state.info2db.companyName} />
+                            </>
+                        )
+                        :
+                        (
+                            <>
+                                <Name name={this.state.info2db.name} />
+                                <ReleaseDate date={this.state.info2db.releaseDate} />
+                            </>
+                        )}
+                </div>
+
+                <div className="col-1 d-flex text-center" onClick={() => { this.add2db(this.state.info2db) }}>
+                    <Addbtn />
+                </div>
+            </li>
+        )
+    }
 }
 
 export default List

@@ -1,7 +1,7 @@
 import React from 'react';
 
 function ReleaseDate(props) {
-    return <p className="mt-0">{props.date[props.date.length - 1].human}</p>
+    return <p>Release Date: <span className="badge badge-secondary">{props.date.human}</span></p>
 }
 
 export default ReleaseDate
