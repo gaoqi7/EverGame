@@ -83,12 +83,12 @@ class Login extends Component {
                 <Button onClick={this.handleLogout} disabled={!this.state.authenticated} className="logoutBtn btn btn-warning">Logout</Button>
 
 
-                <div>
+                {/* <div>
                     <Button onClick={this.handleAddSample} disabled={!this.state.authenticated} className = 'bg-success'>Add sample to userList</Button>
                 </div>
                 <div>
                     <Button onClick={this.handlePopulate} disabled={!this.state.authenticated} className = 'bg-info'>Populate</Button>
-                </div>
+                </div> */}
                 {/* <Button onClick = {this.handleGet} id="getBtn">GET igdb</Button> */}
                 <SignUpContainer show={this.state.signUpShow} hide={this.handleCloseSignUp.bind(this)} />
                 <LoginContainer show={this.state.loginShow} hide={this.handleCloseLogin.bind(this)}
