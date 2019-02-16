@@ -26,11 +26,10 @@ class List extends Component {
             }
         }
     }
-    onMouseOver() { this.setState({ mouseOver: true }); console.log(this.state.info2db) }
+    onMouseOver() { this.setState({ mouseOver: true }) }
     onMouseLeave() { this.setState({ mouseOver: false }) }
 
     add2db(data) {
-        console.log("this is the data to database" + data)
         API.addNew(data)
             .then(() => { console.log("cool") })
             .catch(err => { console.log(err) })
