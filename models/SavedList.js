@@ -3,6 +3,10 @@ const { Schema } = mongoose;
 
 const SavedListSchema = new Schema({
     // Name, Img, Genre, Release Date
+    userId: {
+        type: String,
+        required: true
+    },
     name: {
         type: String,
         required: true
@@ -24,8 +28,8 @@ const SavedListSchema = new Schema({
         required: true
     },
 
-    company: {
-        type: Array
+    companyName: {
+        type: String
     }
 })
 
