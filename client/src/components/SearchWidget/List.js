@@ -18,10 +18,10 @@ class List extends Component {
                 name: props.apiReturn.name,
                 genre: props.apiReturn.genres,
                 companyName: props.apiReturn.involved_companies.filter(el => el.publisher)[0].company.name,
-                releaseDate: {
-                    data: props.apiReturn.release_dates[props.apiReturn.release_dates.length - 1].date,
-                    human: props.apiReturn.release_dates[props.apiReturn.release_dates.length - 1].human
-                }
+                releaseDate: [
+                    props.apiReturn.release_dates[props.apiReturn.release_dates.length - 1].date,
+                    props.apiReturn.release_dates[props.apiReturn.release_dates.length - 1].human
+                ]
             }
         }
     }

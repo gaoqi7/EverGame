@@ -66,8 +66,10 @@ app.post("/api/search", function (req, res) {
 
 app.post("/api/addNew", function (req, res) {
   console.log(req.body.newItemInfo)
-  let d = req.body.newItemInfo.info2db
+  let d = req.body.newItemInfo
+  console.log(d)
   db.SavedList.create(d)
+    .then(game => { console.log(game) })
 })
 
 app.use(routes);

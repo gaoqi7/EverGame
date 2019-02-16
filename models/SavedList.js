@@ -14,7 +14,7 @@ const SavedListSchema = new Schema({
     },
 
     releaseDate: {
-        type: String,
+        type: Array,
         default: null
     },
 
