@@ -30,6 +30,12 @@ const SavedListSchema = new Schema({
 
     companyName: {
         type: String
+    },
+    cover: {
+        type: String
+    },
+    summary: {
+        type: String
     }
 })
 

@@ -10,22 +10,20 @@ class SearchWidget extends Component {
         query: '',
         apiReturn: []
     }
-
-    onMouseEnter() {
-
+    handleStopSearch = () => {
+        this.setState({ apiReturn: [] })
     }
-
     fetchData = () => {
         console.log(this.state.query)
         API.search(this.state.query)
             .then(res => {
                 let dataFilter = res.data.filter(el => el.release_dates[el.release_dates.length - 1].date > 1550348343)
                 this.setState({ apiReturn: dataFilter });
+                console.log(">>>>>>>This is the API data after Filter<<<<<<<<<")
                 console.log(dataFilter)
             })
             .catch(error => { console.log(error) });
     }
-
     handleInputChange = event => {
         this.setState({ query: event.target.value });
         if (event.target.value.length <= 5) {
@@ -34,21 +32,22 @@ class SearchWidget extends Component {
             setTimeout(this.fetchData, 300)
         }
     }
-
-
     render() {
         return (
-
-            <div className="holderDiv">
+            <div className="holderDiv"
+                onBlur={this.handleStopSearch}
+            >
                 <form>
                     <input className="searchBar"
                         type="text"
                         placeholder="Search"
                         value={this.state.query}
                         onChange={this.handleInputChange}
+
                     />
                 </form>
                 <div className="container"
+
                     style={{
                         position: "absolute",
                         zIndex: "3",
@@ -57,9 +56,8 @@ class SearchWidget extends Component {
                         borderRadius: "5px",
                         border: "black 1px solid"
                     }}
-                    >
-
-                    {this.state.apiReturn.map((elem) => <List apiReturn={elem} key={elem.id} />)}
+                >
+                    {this.state.apiReturn.map((elem) => <List apiReturn={elem} stopSearch={this.handleStopSearch} key={elem.id} />)}
 
                 </div>
             </div>
