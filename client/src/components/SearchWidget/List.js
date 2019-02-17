@@ -22,16 +22,18 @@ class List extends Component {
                 releaseDate: [
                     props.apiReturn.release_dates[props.apiReturn.release_dates.length - 1].date,
                     props.apiReturn.release_dates[props.apiReturn.release_dates.length - 1].human
-                ]
+                ],
+                cover: `https://images.igdb.com/igdb/image/upload/t_cover_big/${props.apiReturn.cover.image_id}.jpg`,
+                summary: props.apiReturn.summary
             }
         }
     }
     onMouseOver() { this.setState({ mouseOver: true }) }
     onMouseLeave() { this.setState({ mouseOver: false }) }
 
-    add2db(data) {
+    add2db(data, props) {
         API.addNew(data)
-            .then(() => { console.log("cool") })
+            .then(() => this.props.stopSearch())
             .catch(err => { console.log(err) })
     }
 
@@ -45,11 +47,11 @@ class List extends Component {
                 <div className="col-2 d-flex text-center">
                     <Cover imgInfo={this.state.imgLink} alt={this.props.apiReturn.id} />
                 </div>
-                <div className="col-9 d-flex flex-column justify-content-center" >
+                <div className="col-9 d-flex flex-column justify-content-center" onClick={() => { this.props.stopSearch() }} >
                     {this.state.mouseOver ?
                         (
                             <>
-                                <Genre genreList={this.state.info2db.genre} />
+                                <Genre genreList={this.state.info2db.genre.slice(0, 2)} />
                                 <Company companyInfo={this.state.info2db.companyName} />
                             </>
                         )
@@ -62,7 +64,10 @@ class List extends Component {
                         )}
                 </div>
 
-                <div className="col-1 d-flex" onClick={() => { this.add2db(this.state.info2db) }}>
+                <div className="col-1 d-flex" onMouseDown={() => {
+                    this.add2db(this.state.info2db);
+                    // this.props.stopSearch()
+                }}>
                     <Addbtn />
                 </div>
             </li>

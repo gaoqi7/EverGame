@@ -11,10 +11,7 @@ export default {
     },
     sendId: function () {
         return axios.post('/api/getlist', { id: localStorage.getItem('id') })
-            .then(res => {
-                console.log('*****************************************************************');
-                console.log(res)
-            });
+
     },
     test: function () {
         axios.post('/api/savedList/test', {

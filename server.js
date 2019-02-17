@@ -37,8 +37,8 @@ app.use(session({
 // Configure Mongoose
 mongoose.connect(
 
-  process.env.MONGODB_URI || "mongodb://localhost/countdown-project",
-  // process.env.MONGODB_URI || "mongodb://192.168.56.10/countdown-project",
+  // process.env.MONGODB_URI || "mongodb://localhost/countdown-project",
+  process.env.MONGODB_URI || "mongodb://192.168.56.10/countdown-project",
   {
     useCreateIndex: true,
     useNewUrlParser: true
@@ -63,17 +63,17 @@ app.post("/api/search", function (req, res) {
 })
 
 app.post("/api/addNew", function (req, res) {
-  let d = req.body.newItemInfo
-  db.SavedList.create(d)
-    .then(game => { console.log(game) })
+  console.log("this is what you want to write in db")
+  console.log(req.body.newItemInfo)
+  db.SavedList.create(req.body.newItemInfo)
+    .then(res => { console.log(res) })
+    .catch(err => console.log(err))
 })
 
 app.post("/api/getlist", function (req, res) {
   console.log(req.body)
   db.SavedList.find({ userId: req.body.id })
-    .lean()
-    .then(list => { console.log(JSON.stringify(list)); return res.end(JSON.stringify(list)); })
-
+    .then(list => res.json(list))
 })
 
 

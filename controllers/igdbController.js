@@ -29,8 +29,9 @@ module.exports = {
 
         })
             .then((response) => {
+                console.log("****************  THIS IS THE DATA COMING FROM IGDB API *********************")
                 console.log(response.data);
-                console.log("********************************************************")
+                console.log("END OF ********  THIS IS THE DATA COMING FROM IGDB API *********************")
                 res.json(response.data)
             })
             .catch(e => {
