@@ -1,25 +1,36 @@
 const db = require('../models');
 
-module.exports = { 
+module.exports = {
 
-    test: function(req,res) {
+    test: function (req, res) {
         console.log(req.body);
-        db.User.find({email: req.body.email})  // or username
-        .then(user => {
-            if (user)
-            db.SavedList.create(req.body)
-                .then(game => res.json(game))
-                .catch(err => res.status(422).json(err));
-        })
+        db.User.find({ email: req.body.email })  // or username
+            .then(user => {
+                if (user)
+                    db.SavedList.create(req.body)
+                        .then(game => res.json(game))
+                        .catch(err => res.status(422).json(err));
+            })
     },
 
-    populate: function(req,res) {
-        db.User.findOne({email: req.body.email})
+    populate: function (req, res) {
+        db.User.findOne({ email: req.body.email })
             .populate('savedList')
             .exec(function (err, response) {
                 if (err) return console.log(err);
                 console.log(response);
             }
             )
-        }           
+    },
+    addNewGame: function (req, res) {
+        console.log(req.body.newItemInfo)
+        db.SavedList.create(req.body.newItemInfo)
+            .then(list => res.json(list))
+            .catch(err => console.log(err))
+    },
+    getUserGameList: function (req, res) {
+        db.SavedList.find({ userId: req.body.id })
+            .then(list => res.json(list))
+            .catch(err => console.log(err))
+    }
 }

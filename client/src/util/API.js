@@ -7,11 +7,13 @@ export default {
 
     },
     addNew: function (info) {
-        return axios.post('/api/addNew', { newItemInfo: info })
+        return axios.post('/api/savedList/addNew', { newItemInfo: info })
     },
-    sendId: function () {
-        return axios.post('/api/getlist', { id: localStorage.getItem('id') })
-
+    sendId: function (id) {
+        return axios.post('/api/savedList/getlist', id)
+    },
+    getUserName: function (id) {
+        return axios.post('/api/user', id)
     },
     test: function () {
         axios.post('/api/savedList/test', {

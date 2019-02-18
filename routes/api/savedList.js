@@ -7,4 +7,9 @@ router.route("/test")
 router.route("/populate")
     .post(savedListController.populate);
 
+router.route('/addNew')
+    .post(savedListController.addNewGame);
+router.route('/getlist')
+    .post(savedListController.getUserGameList);
+
 module.exports = router;
