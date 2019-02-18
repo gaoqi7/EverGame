@@ -17,3 +17,12 @@ background-image: url("https://www.transparenttextures.com/patterns/hexellence.p
     min-height: 100vh;
     transition: all 0.3s;
 }
+
+#welcome-text {
+    color: white;
+    margin-right: 20px;
+}
+
+#button1 {
+    margin-right: 5px;
+}
