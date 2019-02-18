@@ -8,18 +8,28 @@ import SearchWidget from '../components/SearchWidget/SearchWidget'
 import API from '../util/API'
 
 class yourList extends Component {
-  state = { data: {} }
+  constructor(props) {
+    super(props)
+    this.state = { data: [] }
+    this.getGameList = this.getGameList.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
+  }
+
+  handleLogout = () => { this.setState({ data: [] }) }
+
   getGameList = () => {
     API.sendId()
       .then((res) => {
-        this.setState({ data: res });
+        this.setState({ data: res.data.reverse() });
         console.log("userlist from db")
         console.log(this.state.data)
       })
   }
 
   componentDidMount() {
-    this.getGameList()
+    if (localStorage.getItem("id")) {
+      this.getGameList()
+    }
   }
 
   render() {
@@ -27,11 +37,12 @@ class yourList extends Component {
       <div className="wrapper" >
         <Sidebar />
         <div id="content">
-          <Header />
+          <Header handleLogout={this.handleLogout} retrieveList={this.getGameList} />
           <Logo />
-          <SearchWidget />
+          <SearchWidget handleNewAdd={this.getGameList} />
           <div className="listDiv">
-            {this.state.data.data === undefined ? <p>Sorry , we are loading...</p> : this.state.data.data.map(elem => <List data={elem} key={elem._id} />)}
+            {/* {this.state.data.data === undefined ? <p>Sorry , we are loading...</p> : this.state.data.data.map(elem => <List data={elem} key={elem._id} />)} */}
+            {this.state.data.map(elem => <List data={elem} key={elem._id} />)}
           </div>
         </div>
       </div>

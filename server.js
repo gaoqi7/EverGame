@@ -63,10 +63,9 @@ app.post("/api/search", function (req, res) {
 })
 
 app.post("/api/addNew", function (req, res) {
-  console.log("this is what you want to write in db")
   console.log(req.body.newItemInfo)
   db.SavedList.create(req.body.newItemInfo)
-    .then(res => { console.log(res) })
+    .then(list => res.json(list))
     .catch(err => console.log(err))
 })
 

@@ -11,7 +11,8 @@ class SearchWidget extends Component {
         apiReturn: []
     }
     handleStopSearch = () => {
-        this.setState({ apiReturn: [] })
+        this.setState({ apiReturn: [] });
+        console.log("hide option list")
     }
     fetchData = () => {
         console.log(this.state.query)
@@ -21,6 +22,8 @@ class SearchWidget extends Component {
                 this.setState({ apiReturn: dataFilter });
                 console.log(">>>>>>>This is the API data after Filter<<<<<<<<<")
                 console.log(dataFilter)
+                console.log(">>>>>>>This is props<<<<<<<<<")
+                console.log(this.props)
             })
             .catch(error => { console.log(error) });
     }
@@ -57,7 +60,7 @@ class SearchWidget extends Component {
                         border: "black 1px solid"
                     }}
                 >
-                    {this.state.apiReturn.map((elem) => <List apiReturn={elem} stopSearch={this.handleStopSearch} key={elem.id} />)}
+                    {this.state.apiReturn.map((elem) => <List handleUpdateList={this.props.handleNewAdd} apiReturn={elem} stopSearch={this.handleStopSearch} key={elem.id} />)}
 
                 </div>
             </div>
