@@ -5,8 +5,6 @@ const keys = require('../keys')
 
 module.exports = {
 
-    // API.getGame(this.state....) <- client/src/pages
-    // return axios.get("/api/igdb", { params: { param1 }, { param2 } }); <-- client/src/utils
     search: (req, res) => {
 
         axios.get("https://api-v3.igdb.com/games", {
@@ -40,10 +38,3 @@ module.exports = {
 
     }
 }
-
-// Genre Route
-
-// Image Route
-
-
-// Optional Route:

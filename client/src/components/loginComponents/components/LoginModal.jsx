@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form'
 import "../components/modal.css"
-// import { Link } from 'react-router-dom';
+// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function LoginModal({onSubmit, onChange, errors, successMessage, user, show, hide}) {
 

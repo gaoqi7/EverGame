@@ -34,9 +34,6 @@ export default {
         })
             .then(res => console.log(res))
             .catch(err => console.log(err))
-    },
-    populate: function () {
-        axios.post('/api/savedList/populate', { email: 'testuser@gmail.com' })
     }
 
 }

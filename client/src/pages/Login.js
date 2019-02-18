@@ -17,17 +17,14 @@ class Login extends Component {
         this.handleShowLogin = this.handleShowLogin.bind(this);
         this.handleCloseLogin = this.handleCloseLogin.bind(this);
         this.handleShowSignUp = this.handleShowSignUp.bind(this);
-        this.handleClosesignUp = this.handleCloseSignUp.bind(this);
+        this.handleCloseSignUp = this.handleCloseSignUp.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
-        this.handleAddSample = this.handleAddSample.bind(this);
-        this.handlePopulate = this.handlePopulate.bind(this);
-        // this.handleGet = this.handleGet.bind(this);
 
 
         this.state = {
             loginShow: false,
             signUpShow: false,
-            authenticated: false
+            authenticated: false,
         }
     }
 
@@ -59,7 +56,6 @@ class Login extends Component {
     handleLogout() {
         this.setState({ authenticated: false });
         Auth.deauthenticateUser();
-        this.props.handleLogout();
     }
 
     toggleAuthenticateStatus() {
@@ -67,30 +63,42 @@ class Login extends Component {
         this.setState({ authenticated: Auth.isUserAuthenticated() })
     }
 
-    handleAddSample() {
-        API.test();
-    }
-
-    handlePopulate() {
-        API.populate();
-    }
-
     render() {
+        const { authenticated } = this.state;
+        let welcomeMsg = null, 
+            buttons = null;
+        if (authenticated) {
+            welcomeMsg = <span id = "welcome-text">Welcome (Logged in user)</span> 
+            buttons = 
+                <Button 
+                    onClick={this.handleLogout}
+                    className={"logoutBtn btn btn-warning " + (authenticated ? "visible" : "invisible")}>
+                    Logout
+                </Button>
+
+        }
+        else {
+            welcomeMsg = <span id = "welcome-text">Welcome Guest</span>
+            buttons = <>
+                <Button 
+                    id = "button1"
+                    onClick={this.handleShowLogin} 
+                    className={"loginBtn btn btn-warning " + (authenticated ? "invisible" : "visible")}>
+                Login
+                </Button>
+                <Button 
+                    onClick={this.handleShowSignUp} 
+                    className={"signUpBtn btn btn-warning " + (authenticated  ? "invisible" : "visible")}>
+                    Register
+                </Button> </>
+        }
+        
+        
+
         return (
-
             <div className="loginDiv">
-                <Button onClick={this.handleShowLogin} disabled={this.state.authenticated} className="loginBtn btn btn-warning">Login</Button>
-                <Button onClick={this.handleShowSignUp} className="signUpBtn btn btn-warning">Register</Button>
-                <Button onClick={this.handleLogout} disabled={!this.state.authenticated} className="logoutBtn btn btn-warning">Logout</Button>
-
-
-                {/* <div>
-                    <Button onClick={this.handleAddSample} disabled={!this.state.authenticated} className = 'bg-success'>Add sample to userList</Button>
-                </div>
-                <div>
-                    <Button onClick={this.handlePopulate} disabled={!this.state.authenticated} className = 'bg-info'>Populate</Button>
-                </div> */}
-                {/* <Button onClick = {this.handleGet} id="getBtn">GET igdb</Button> */}
+                {welcomeMsg} 
+                {buttons}
                 <SignUpContainer show={this.state.signUpShow} hide={this.handleCloseSignUp.bind(this)} />
                 <LoginContainer
                     show={this.state.loginShow}
