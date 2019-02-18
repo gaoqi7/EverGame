@@ -18,11 +18,9 @@ class yourList extends Component {
   handleLogout = () => { this.setState({ data: [] }) }
 
   getGameList = () => {
-    API.sendId()
+    API.sendId({ id: localStorage.getItem('id') })
       .then((res) => {
         this.setState({ data: res.data.reverse() });
-        console.log("userlist from db")
-        console.log(this.state.data)
       })
   }
 

@@ -16,7 +16,7 @@ module.exports = {
             },
             params: {
 
-                search: req,
+                search: req.body.searchContent,
                 fields: "name,genres.name,involved_companies.company,involved_companies.developer,involved_companies.publisher,involved_companies.company.name,cover.image_id,release_dates.date,release_dates.human,summary",
                 "filter[cover.image_id][exists]": "null",
                 "filter[involved_companies][exists]": "null",

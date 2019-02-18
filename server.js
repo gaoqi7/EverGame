@@ -3,9 +3,7 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const mongoose = require('mongoose');
-const db = require('./models')
 
-const igdbController = require("./controllers/igdbController");
 
 const cors = require('cors');
 
@@ -55,27 +53,6 @@ const localSignupStrategy = require('./config/local-signup');
 const localLoginStrategy = require('./config/local-login');
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
-
-
-
-app.post("/api/search", function (req, res) {
-  igdbController.search(req.body.searchContent, res)
-})
-
-app.post("/api/addNew", function (req, res) {
-  console.log(req.body.newItemInfo)
-  db.SavedList.create(req.body.newItemInfo)
-    .then(list => res.json(list))
-    .catch(err => console.log(err))
-})
-
-app.post("/api/getlist", function (req, res) {
-  console.log(req.body)
-  db.SavedList.find({ userId: req.body.id })
-    .then(list => res.json(list))
-})
-
-
 
 app.use(routes);
 
