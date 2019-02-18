@@ -31,10 +31,9 @@ class List extends Component {
     onMouseOver() { this.setState({ mouseOver: true }) }
     onMouseLeave() { this.setState({ mouseOver: false }) }
 
-    add2db(data, props) {
-        API.addNew(data)
-            .then(() => this.props.stopSearch())
-            .catch(err => { console.log(err) })
+    add2db(data) {
+        console.log(this.props)
+        API.addNew(data).then(() => console.log("what are you doing ???")).then(() => { this.props.handleUpdateList() }).catch(err => { console.log(err) })
     }
 
     render() {
@@ -66,7 +65,8 @@ class List extends Component {
 
                 <div className="col-1 d-flex" onMouseDown={() => {
                     this.add2db(this.state.info2db);
-                    // this.props.stopSearch()
+                    console.log(this)
+                    // this.props.handleUpdateList()
                 }}>
                     <Addbtn />
                 </div>

@@ -59,6 +59,7 @@ class Login extends Component {
     handleLogout() {
         this.setState({ authenticated: false });
         Auth.deauthenticateUser();
+        this.props.handleLogout();
     }
 
     toggleAuthenticateStatus() {
@@ -91,8 +92,12 @@ class Login extends Component {
                 </div> */}
                 {/* <Button onClick = {this.handleGet} id="getBtn">GET igdb</Button> */}
                 <SignUpContainer show={this.state.signUpShow} hide={this.handleCloseSignUp.bind(this)} />
-                <LoginContainer show={this.state.loginShow} hide={this.handleCloseLogin.bind(this)}
-                    toggleAuthenticateStatus={this.toggleAuthenticateStatus.bind(this)} />
+                <LoginContainer
+                    show={this.state.loginShow}
+                    hide={this.handleCloseLogin.bind(this)}
+                    toggleAuthenticateStatus={this.toggleAuthenticateStatus.bind(this)}
+                    retrieveList={this.props.retrieveList}
+                />
             </div>
 
         );

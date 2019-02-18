@@ -53,6 +53,9 @@ class LoginContainer extends React.Component {
 
           Auth.authenticateUser(res.data.token, res.data.user.id);
           // console.log(res)
+          // Get the user game list
+          this.props.retrieveList()
+
           this.props.toggleAuthenticateStatus();
           // localStorage.setItem("user", res.data.user.name);
           // this.props.history.push('/dashboard'); // ?
