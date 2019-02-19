@@ -17,7 +17,7 @@ function Header(props) {
             <Login
                 handleLogout={props.handleLogout}
                 retrieveList={props.retrieveList}
-            // userName={this.props.userName}
+                userName={props.userName}
 
             />
 

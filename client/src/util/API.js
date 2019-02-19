@@ -15,6 +15,9 @@ export default {
     getUserName: function (id) {
         return axios.post('/api/user', id)
     },
+    getPopularList: function () {
+        return axios.get('/api/search/popular')
+    },
     test: function () {
         axios.post('/api/savedList/test', {
             // email:'testuser@gmail.com',
