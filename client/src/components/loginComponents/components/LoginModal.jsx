@@ -5,12 +5,10 @@ import Form from 'react-bootstrap/Form'
 import "../components/modal.css"
 // import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-function LoginModal({onSubmit, onChange, errors, successMessage, user, show, hide, clear}) {
+function LoginModal({onSubmit, onChange, errors, successMessage, user, show, hide}) {
 
-
-    
 return(
-    <Modal show = {show} onHide = {clear} id="loginModal" animation={true}>
+    <Modal show = {show} onHide = {hide} id="loginModal" animation={true}>
     <Modal.Header closeButton className="modal-header modalHeader"> 
         <div className="modalText">Login</div>
         {/* <h4><span className="glyphicon glyphicon-lock"></span> Login</h4> */}
@@ -36,7 +34,7 @@ return(
         </Form>
     </Modal.Body>
     <Modal.Footer className = "modal-footer">
-        <Button type="submit" className="btn btn-danger btn-default pull-left" onClick = {clear}><span className="glyphicon glyphicon-remove"></span> Cancel</Button>
+        <Button type="submit" className="btn btn-danger btn-default pull-left" onClick = {hide}><span className="glyphicon glyphicon-remove"></span> Cancel</Button>
         <p className = "float-right">Not a member? <span>Sign Up</span></p>
         <p className = "float-right">Forgot <span>Password?</span></p>
     </Modal.Footer>

@@ -8,7 +8,6 @@ import './App.css';
 import API from '../util/API'
 
 
-
 class Login extends Component {
 
     constructor(props, context) {
@@ -20,7 +19,7 @@ class Login extends Component {
         this.handleShowSignUp = this.handleShowSignUp.bind(this);
         this.handleCloseSignUp = this.handleCloseSignUp.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
-        this.toggleAuthenticateStatus = this.toggleAuthenticateStatus.bind(this);
+
 
         this.state = {
             loginShow: false,
@@ -57,6 +56,7 @@ class Login extends Component {
     handleLogout() {
         this.setState({ authenticated: false });
         Auth.deauthenticateUser();
+        this.props.handleLogout();
     }
 
     toggleAuthenticateStatus() {
@@ -66,13 +66,13 @@ class Login extends Component {
 
     render() {
         const { authenticated } = this.state;
-        
-        let welcomeMsg = null, 
+        let welcomeMsg = null,
             buttons = null;
         if (authenticated) {
-            welcomeMsg = <span id = "welcome-text">{"Welcome " + this.props.userName}</span> 
-            buttons = 
-                <Button 
+            console.log(this.state.userName)
+            welcomeMsg = <span id="welcome-text">Welcome {this.props.userName}</span>
+            buttons =
+                <Button
                     onClick={this.handleLogout}
                     className={"logoutBtn btn btn-warning " + (authenticated ? "visible" : "invisible")}>
                     Logout
@@ -80,33 +80,32 @@ class Login extends Component {
 
         }
         else {
-            welcomeMsg = <span id = "welcome-text">Welcome Guest</span>
+            welcomeMsg = <span id="welcome-text">Welcome Guest</span>
             buttons = <>
-                <Button 
-                    id = "button1"
-                    onClick={this.handleShowLogin} 
+                <Button
+                    id="button1"
+                    onClick={this.handleShowLogin}
                     className={"loginBtn btn btn-warning " + (authenticated ? "invisible" : "visible")}>
-                Login
+                    Login
                 </Button>
-                <Button 
-                    onClick={this.handleShowSignUp} 
-                    className={"signUpBtn btn btn-warning " + (authenticated  ? "invisible" : "visible")}>
+                <Button
+                    onClick={this.handleShowSignUp}
+                    className={"signUpBtn btn btn-warning " + (authenticated ? "invisible" : "visible")}>
                     Register
                 </Button> </>
         }
-        
-        
+
+
 
         return (
             <div className="loginDiv">
-                {welcomeMsg} 
+                {welcomeMsg}
                 {buttons}
-                <SignUpContainer show={this.state.signUpShow} hide={this.handleCloseSignUp} />
+                <SignUpContainer show={this.state.signUpShow} hide={this.handleCloseSignUp.bind(this)} />
                 <LoginContainer
                     show={this.state.loginShow}
-                    hide={this.handleCloseLogin}
-                    reload={this.props.reload}
-                    toggleAuthenticateStatus={this.toggleAuthenticateStatus}
+                    hide={this.handleCloseLogin.bind(this)}
+                    toggleAuthenticateStatus={this.toggleAuthenticateStatus.bind(this)}
                     retrieveList={this.props.retrieveList}
                 />
             </div>
