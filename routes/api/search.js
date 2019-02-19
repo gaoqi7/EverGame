@@ -6,5 +6,8 @@ const igdbController = require("../../controllers/igdbController");
 router.route("/")
     .post(igdbController.search);
 
+router.route('/popular')
+    .get(igdbController.queryPopular);
+
 
 module.exports = router;

@@ -10,7 +10,10 @@ import API from '../util/API'
 class yourList extends Component {
   constructor(props) {
     super(props)
-    this.state = { data: [] }
+    this.state = {
+      data: [],
+      userInfo: ""
+    }
     this.getGameList = this.getGameList.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
   }
@@ -24,9 +27,22 @@ class yourList extends Component {
       })
   }
 
+  getUserName = (id) => {
+    API.getUserName(id)
+      .then(data => {
+        this.setState({ userInfo: data.data[0].name });
+        console.log(this.state.userInfo)
+      })
+      .catch(err => console.log(err))
+  }
+
+
+
   componentDidMount() {
-    if (localStorage.getItem("id")) {
-      this.getGameList()
+    let d = localStorage.getItem("id")
+    if (d) {
+      this.getGameList();
+      this.getUserName({ "id": d })
     }
   }
 
@@ -35,7 +51,7 @@ class yourList extends Component {
       <div className="wrapper" >
         <Sidebar />
         <div id="content">
-          <Header handleLogout={this.handleLogout} retrieveList={this.getGameList} />
+          <Header handleLogout={this.handleLogout} retrieveList={this.getGameList} userName={this.state.userInfo} />
           <Logo />
           <SearchWidget handleNewAdd={this.getGameList} />
           <div className="listDiv">

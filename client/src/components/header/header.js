@@ -14,7 +14,12 @@ function Header(props) {
                 <i className="fas fa-align-justify"></i>
             </button>
             {/* <button type="button" className="btn btn-warning loginBtn">Login</button> */}
-            <Login handleLogout={props.handleLogout} retrieveList={props.retrieveList} />
+            <Login
+                handleLogout={props.handleLogout}
+                retrieveList={props.retrieveList}
+                userName={props.userName}
+
+            />
 
         </div>
     );
