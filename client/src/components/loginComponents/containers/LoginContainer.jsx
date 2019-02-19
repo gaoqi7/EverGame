@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Auth from '../../../util/Auth';
 import LoginModal from '../components/LoginModal.jsx';
+// import history from '../../../util/history';
 
 class LoginContainer extends React.Component {
 
@@ -31,6 +32,8 @@ class LoginContainer extends React.Component {
 
     this.processForm = this.processForm.bind(this);
     this.changeUser = this.changeUser.bind(this);
+    this.clearInfo = this.clearInfo.bind(this);
+    console.log(this.props)
   }
 
   /**
@@ -54,11 +57,9 @@ class LoginContainer extends React.Component {
           Auth.authenticateUser(res.data.token, res.data.user.id);
           // console.log(res)
           // Get the user game list
-          this.props.retrieveList()
-
-          this.props.toggleAuthenticateStatus();
-          // localStorage.setItem("user", res.data.user.name);
-          // this.props.history.push('/dashboard'); // ?
+          // this.props.retrieveList();
+          this.props.toggleAuthenticateStatus();      
+          this.props.reload();
         }
         else { }
       }).catch(err => { console.log(err) })
@@ -79,6 +80,14 @@ class LoginContainer extends React.Component {
     });
   }
 
+  clearInfo() {
+    let user = {...this.state.user}
+    user['email'] = '';
+    user['password'] = '';
+    this.setState({ user })
+    this.props.hide();
+  }
+
   /**
    * Render the component.
    */
@@ -92,6 +101,7 @@ class LoginContainer extends React.Component {
         user={this.state.user}
         show={this.props.show}
         hide={this.props.hide}
+        clear={this.clearInfo}
       />
     );
   }

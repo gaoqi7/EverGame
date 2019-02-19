@@ -8,6 +8,7 @@ import './App.css';
 import API from '../util/API'
 
 
+
 class Login extends Component {
 
     constructor(props, context) {
@@ -19,12 +20,12 @@ class Login extends Component {
         this.handleShowSignUp = this.handleShowSignUp.bind(this);
         this.handleCloseSignUp = this.handleCloseSignUp.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
-
+        this.toggleAuthenticateStatus = this.toggleAuthenticateStatus.bind(this);
 
         this.state = {
             loginShow: false,
             signUpShow: false,
-            authenticated: false,
+            authenticated: false
         }
     }
 
@@ -65,10 +66,13 @@ class Login extends Component {
 
     render() {
         const { authenticated } = this.state;
+        
         let welcomeMsg = null, 
             buttons = null;
         if (authenticated) {
-            welcomeMsg = <span id = "welcome-text">Welcome (Logged in user)</span> 
+            const username = API.getUserName();
+            console.log(username);
+            welcomeMsg = <span id = "welcome-text">{"Welcome " + username}</span> 
             buttons = 
                 <Button 
                     onClick={this.handleLogout}
@@ -99,11 +103,12 @@ class Login extends Component {
             <div className="loginDiv">
                 {welcomeMsg} 
                 {buttons}
-                <SignUpContainer show={this.state.signUpShow} hide={this.handleCloseSignUp.bind(this)} />
+                <SignUpContainer show={this.state.signUpShow} hide={this.handleCloseSignUp} />
                 <LoginContainer
                     show={this.state.loginShow}
-                    hide={this.handleCloseLogin.bind(this)}
-                    toggleAuthenticateStatus={this.toggleAuthenticateStatus.bind(this)}
+                    hide={this.handleCloseLogin}
+                    reload={this.props.reload}
+                    toggleAuthenticateStatus={this.toggleAuthenticateStatus}
                     retrieveList={this.props.retrieveList}
                 />
             </div>
