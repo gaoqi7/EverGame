@@ -18,7 +18,7 @@ function Header(props) {
                 handleLogout={props.handleLogout}
                 retrieveList={props.retrieveList}
                 userName={props.userName}
-                reload={props.reload}
+
             />
 
         </div>

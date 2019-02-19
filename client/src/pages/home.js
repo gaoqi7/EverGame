@@ -6,18 +6,11 @@ import Logo from "../components/logo/logo";
 import Carousel from "../components/carousel/carousel";
 import Sidebar from "../components/sidebar/sidebar";
 import API from '../util/API'
-import history from '../util/history';
 
 
 
 
 class home extends Component {
-
-  constructor(){
-    super()
-    this.reloadHome = this.reloadHome.bind(this);
-  }
-
   state = {
     userInfo: "",
     popularList: []
@@ -48,9 +41,6 @@ class home extends Component {
     this.getPopularList()
   }
 
-  reloadHome() {
-    history.push('/home');
-  }
 
 
   handleLogout = () => { console.log("logout") }
@@ -64,7 +54,6 @@ class home extends Component {
             handleLogout={this.handleLogout}
             retrieveList={this.getGameList}
             userName={this.state.userInfo}
-            reload={this.reloadHome}
           />
           <br></br>
           <Logo />
