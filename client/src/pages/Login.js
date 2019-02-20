@@ -77,7 +77,6 @@ class Login extends Component {
                     className={"logoutBtn btn btn-warning " + (authenticated ? "visible" : "invisible")}>
                     Logout
                 </Button>
-
         }
         else {
             welcomeMsg = <span id = "welcome-text">Welcome Guest</span>
@@ -101,7 +100,11 @@ class Login extends Component {
             <div className="loginDiv">
                 {welcomeMsg} 
                 {buttons}
-                <SignUpContainer show={this.state.signUpShow} hide={this.handleCloseSignUp} />
+                <SignUpContainer 
+                    show={this.state.signUpShow} 
+                    hide={this.handleCloseSignUp}
+                    reload={this.props.reload}
+                />
                 <LoginContainer
                     show={this.state.loginShow}
                     hide={this.handleCloseLogin}

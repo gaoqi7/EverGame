@@ -56,7 +56,8 @@ class LoginContainer extends React.Component {
           Auth.authenticateUser(res.data.token, res.data.user.id);
           // Get the user game list
           this.props.retrieveList();
-          this.props.toggleAuthenticateStatus();      
+          this.props.toggleAuthenticateStatus();
+          this.clearInfo();      
           this.props.reload();
         }
         else { }
@@ -79,7 +80,7 @@ class LoginContainer extends React.Component {
   }
 
   clearInfo() {
-    let user = {...this.state.user}
+    let user = {...this.state.user};
     user['email'] = '';
     user['password'] = '';
     this.setState({ user })
