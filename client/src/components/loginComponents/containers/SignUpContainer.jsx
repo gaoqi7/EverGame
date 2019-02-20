@@ -22,6 +22,7 @@ class SignUpPage extends React.Component {
 
     this.processForm = this.processForm.bind(this);
     this.changeUser = this.changeUser.bind(this);
+    this.clearInfo = this.clearInfo.bind(this);
   }
 
   /**
@@ -43,8 +44,12 @@ class SignUpPage extends React.Component {
                 this.setState({ errors: {} });
                 localStorage.setItem('successMessage', res.message);
                 // this.props.history.push('/dashboard'); // ?
+                this.props.reload();
             }
-            else { this.setState({ errors: res.json });}
+            else { 
+              this.setState({ errors: res.json });
+              console.log(res.json);
+            }
             
         }).catch(err => { console.log(err)})
     }
@@ -64,6 +69,15 @@ class SignUpPage extends React.Component {
     });
   }
 
+  clearInfo() {
+    let user = {...this.state.user};
+    user['email'] = '';
+    user['name'] = '';
+    user['password'] = '';
+    this.setState({ user })
+    this.props.hide();
+  }
+
   /**
    * Render the component.
    */
@@ -76,6 +90,7 @@ class SignUpPage extends React.Component {
         user={this.state.user}
         show={this.props.show}
         hide={this.props.hide}
+        clear={this.clearInfo}
       />
     );
   }

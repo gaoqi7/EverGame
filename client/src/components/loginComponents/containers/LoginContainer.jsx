@@ -79,7 +79,7 @@ class LoginContainer extends React.Component {
   }
 
   clearInfo() {
-    let user = {...this.state.user}
+    let user = {...this.state.user};
     user['email'] = '';
     user['password'] = '';
     this.setState({ user })
