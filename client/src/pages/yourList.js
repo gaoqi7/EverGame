@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css"
 import Header from "../components/header/header";
 import List from "../components/list/list";
-import Logo from "../components/logo/logo";
+import YourLogo from "../components/logo/yourLogo";
 import Sidebar from "../components/sidebar/sidebar";
 import SearchWidget from '../components/SearchWidget/SearchWidget'
 import API from '../util/API'
@@ -52,7 +52,7 @@ class yourList extends Component {
         <Sidebar />
         <div id="content">
           <Header handleLogout={this.handleLogout} retrieveList={this.getGameList} userName={this.state.userInfo} />
-          <Logo />
+          <YourLogo />
           <SearchWidget handleNewAdd={this.getGameList} />
           <div className="listDiv">
             {/* {this.state.data.data === undefined ? <p>Sorry , we are loading...</p> : this.state.data.data.map(elem => <List data={elem} key={elem._id} />)} */}
