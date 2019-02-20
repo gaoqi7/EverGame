@@ -49,6 +49,7 @@ class home extends Component {
   }
 
   reloadHome() {
+    window.location.reload();
     history.push('/home');
   }
 
