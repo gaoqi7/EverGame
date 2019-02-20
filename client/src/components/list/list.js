@@ -9,6 +9,7 @@ function List(props) {
       <h2>{props.data.name}</h2>
       <p className="listDescription">Description: {props.data.summary}</p>
       <div className="countdownTimer"> {props.data.releaseDate[1]} </div>
+      {props.data._id ? <button onClick={() => props.handleDelete(props.data._id)}>Delete</button> : <></>}
     </div>
   )
 

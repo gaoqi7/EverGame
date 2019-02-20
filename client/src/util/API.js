@@ -9,6 +9,9 @@ export default {
     addNew: function (info) {
         return axios.post('/api/savedList/addNew', { newItemInfo: info })
     },
+    delete: function (info) {
+        return axios.post('/api/savedList/delete', { _id: info })
+    },
     sendId: function (id) {
         return axios.post('/api/savedList/getlist', id)
     },

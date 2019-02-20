@@ -11,5 +11,6 @@ router.route('/addNew')
     .post(savedListController.addNewGame);
 router.route('/getlist')
     .post(savedListController.getUserGameList);
-
+router.route('/delete')
+    .post(savedListController.deleteOneGame);
 module.exports = router;

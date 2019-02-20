@@ -32,5 +32,10 @@ module.exports = {
         db.SavedList.find({ userId: req.body.id })
             .then(list => res.json(list))
             .catch(err => console.log(err))
+    },
+    deleteOneGame: function (req, res) {
+        db.SavedList.remove({ _id: req.body._id })
+            .then(response => res.json(response))
+            .catch(err => console.log(err))
     }
 }
