@@ -16,6 +16,7 @@ class yourList extends Component {
     }
     this.getGameList = this.getGameList.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
+    this.deleteOneGame = this.deleteOneGame.bind(this)
   }
 
   handleLogout = () => { this.setState({ data: [] }) }
@@ -24,7 +25,14 @@ class yourList extends Component {
     API.sendId({ id: localStorage.getItem('id') })
       .then((res) => {
         this.setState({ data: res.data.reverse() });
+        console.log(res.data)
       })
+  }
+
+  deleteOneGame = (_id) => {
+    API.delete(_id)
+      .then(() => this.getGameList())
+      .catch(err => console.log(err))
   }
 
   getUserName = (id) => {
@@ -56,7 +64,7 @@ class yourList extends Component {
           <SearchWidget handleNewAdd={this.getGameList} />
           <div className="listDiv">
             {/* {this.state.data.data === undefined ? <p>Sorry , we are loading...</p> : this.state.data.data.map(elem => <List data={elem} key={elem._id} />)} */}
-            {this.state.data.map(elem => <List data={elem} key={elem._id} />)}
+            {this.state.data.map(elem => <List data={elem} key={elem._id} handleDelete={this.deleteOneGame} />)}
           </div>
         </div>
       </div>
