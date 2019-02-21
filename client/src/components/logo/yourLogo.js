@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import "../logo/logo.css";
-import Auth from '../../util/Auth';
-import Login from "../../pages/Login"
 import API from '../../util/API'
 
 class YourLogo extends Component {
