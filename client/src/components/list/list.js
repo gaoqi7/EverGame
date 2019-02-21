@@ -4,13 +4,14 @@ import moment from "moment";
 import Countdown from 'react-countdown-now';
 
 function List(props) {
+
   console.log(props);
+
   let time = props.data.releaseDate[1];
   let timeChange = moment(time, 'YYYY-MMM-DD').format('YYYY-MM-DD');
   let currentTime = moment();
   let secondsConversion = currentTime.diff(timeChange, "seconds");
   let finalTime = parseInt(secondsConversion) * 1000;
-  console.log(finalTime);
 
   const Completionist = () => <div className="ready">Ready to Play!</div>;
 
@@ -25,7 +26,7 @@ function List(props) {
     }
     else {
       // Render a countdown
-      return <div className="countdownTimer">Released in: {days} Days {hours} H : {minutes} M : {seconds} S </div>;
+      return <div className="countdownTimer">Releases in: {days} Days {hours} H : {minutes} M : {seconds} S </div>;
     }
   };
 
@@ -39,8 +40,8 @@ function List(props) {
           renderer={renderer}
           />
       <p className="listDescription">Description: {props.data.summary}</p>
-      
       {props.data._id ? <button onClick={() => props.handleDelete(props.data._id)} className="btn btn-danger deleteBtn"><strong>X</strong></button> : <></>}
+      
     </div>
   )
 

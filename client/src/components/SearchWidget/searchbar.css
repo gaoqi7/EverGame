@@ -28,12 +28,10 @@
 .addBtn:hover {
 
     color: red;
-    font-size: 6vh;
     transition: .5s;
 }
 
 .addBtn:active {
 
     color: rgb(0, 194, 253);
-    font-size: 6vh;
 }
