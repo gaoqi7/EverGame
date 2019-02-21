@@ -1,18 +1,10 @@
 import "../games/game.css";
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
-// import API from "../utils/API";
 
 class Game extends Component {
     state = {
       game: {}
 };
-
-// componentDidMount() {
-//     API.getGame(this.props.match.params.id)
-//         .then(res => this.setState({ game: res.data }))
-//         .catch(err => console.log(err));
-// }
 
 render() {
     return (

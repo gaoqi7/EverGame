@@ -4,6 +4,7 @@ import "../src/App.css"
 import home from "./pages/home";
 import yourList from "./pages/yourList";
 import gamePage from "./pages/gamePage";
+import constructionPage from "./pages/constructionPage";
 
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
         <Route exact path="/home" component={home} />
         <Route exact path="/yourList" component={yourList} />
         <Route exact path="/game" component={gamePage} />
-        {/* <Route component={NoMatch} /> */}
+        <Route exact path="/construction" component={constructionPage}/>
       </Switch>
     </Router>
   );
