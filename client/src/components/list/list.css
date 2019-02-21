@@ -95,7 +95,8 @@ p {
 
     font-size: 3vh;
     float: right;
-    bottom: 15vh;
+    bottom: 20vh;
     position: relative;
-    right: -15vw;
+    padding-right: 1vw;
+    padding-left: 1vw;
 }
