@@ -22,9 +22,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 app.use(passport.initialize());
 // Serve up static assets
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"));
-// }
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
+// let root = path.join(__dirname, 'client', 'build');
+// app.use(express.static(root));
+// app.use(function(req, res, next) {
+// if (req.method === 'GET' && req.accepts('html') && !req.is('json') && 
+//   !req.path.includes('.')) {
+//      res.sendFile('index.html', { root });
+//   } else next();
+// });
+
 app.use(session({
   secret: 'countdown-project',
   cookie: { maxAge: 60000 },
