@@ -1,7 +1,8 @@
 require("dotenv").config();
 const axios = require('axios');
 // const db = require('../models');
-const keys = require('../keys')
+// const keys = require('../keys')
+// const apikey = keys.igdb;
 
 module.exports = {
 
@@ -9,7 +10,8 @@ module.exports = {
 
         axios.get("https://api-v3.igdb.com/games", {
             headers: {
-                "user-key": "dd3daba0559c0275f3cdcbfbb826ef0e",
+                // "user-key": "dd3daba0559c0275f3cdcbfbb826ef0e",
+                "user-key": "27a478f2511b9b27d5144a66e43f065b",
                 Accept: "application/json"
             },
             params: {
@@ -40,7 +42,8 @@ module.exports = {
     queryPopular: function (req, res) {
         axios.get("https://api-v3.igdb.com/games", {
             headers: {
-                "user-key": "dd3daba0559c0275f3cdcbfbb826ef0e",
+                // "user-key": "dd3daba0559c0275f3cdcbfbb826ef0e",
+                "user-key": "27a478f2511b9b27d5144a66e43f065b",
                 Accept: "application/json"
             },
             params: {

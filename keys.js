@@ -1,3 +1,3 @@
 exports.igdb = { 
-    api_key: process.env.API_KEY
+    value: process.env.API_KEY
 }
